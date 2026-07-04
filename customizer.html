@@ -1,0 +1,1538 @@
+<!DOCTYPE html>
+<html lang="en" data-hero="light" data-accent="peru" data-font="dir1">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DJH Attorneys — Customizer | De Jager Hattingh, Attorneys, Notaries &amp; Conveyancers</title>
+  <meta name="description" content="Interactive design preview for De Jager Hattingh Attorneys, Notaries &amp; Conveyancers (Middelburg, Mpumalanga). Unlisted client demo — compare hero, palette and font options live. Not the firm's live website." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,800;1,400;1,500&family=Source+Sans+3:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Nunito+Sans:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ════════════════════════════════════════════════════════════════
+       DJH ATTORNEYS — THE CUSTOMIZER
+       One master file. Four Directions merged into one theme-able site.
+       Three SITE-WIDE toggle axes, each a data-* attribute on <html>:
+         data-hero   : light (default) | dark
+         data-accent : peru (default)  | slate | sienna
+         data-font   : dir1 (default)  | playfair | lora
+       Every themeable value runs through the role tokens below, so one
+       flip re-themes every section together. Default (un-toggled) state =
+       the Direction bases WITH every WEBSITE_LAYOUT.pdf revision applied.
+       No localStorage — reset-on-reload; a Reset control restores defaults.
+       ════════════════════════════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      /* ── Brand constants (never change with any toggle) ── */
+      --ink:        #14171A;
+      --paper:      #F6F3EE;
+      --paper-60:   rgba(246,243,238,0.6);
+      --paper-30:   rgba(246,243,238,0.3);
+      --accent-2:   #2D636D;          /* slate-teal structural secondary (reviews tint) */
+      /* Firm-name font is locked to the logo face (Cormorant), independent of the font axis */
+      --firm-serif: 'Cormorant Garamond', Georgia, serif;
+
+      --maxw: 1120px;
+      --nav-h: 72px;
+      --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+      /* ── ROLE TOKENS — LIGHT HERO (default) ── */
+      --bg:            #F6F3EE;
+      --bg-alt:        #EFE7DB;        /* warm cream — Services reads like Dir-1 */
+      --surface:       #FBF9F5;
+      --text:          #14171A;
+      --text-muted:    #5A5550;
+      --text-soft:     rgba(20,23,26,0.45);
+      --border:        rgba(20,23,26,0.12);
+      --border-strong: rgba(20,23,26,0.30);
+      --nav-bg:        rgba(246,243,238,0.92);
+      --ph-bg:         #E7DED0;
+      --shadow-card:   rgba(20,23,26,0.22);
+      --hero-glow-1:   rgba(45,99,109,0.10);
+      --hero-glow-2:   rgba(192,148,100,0.14);
+
+      /* Services flashlight glow — light hero: inherently subtler on the pale
+         surface; ring carries more of the effect, wash stays whisper-quiet */
+      --glow-size:       260px;
+      --glow-ring:       0.55;
+      --glow-ring-hover: 1;
+      --glow-wash:       0.09;
+    }
+
+    /* ── ROLE TOKENS — DARK HERO ── */
+    html[data-hero="dark"] {
+      --bg:            #14171A;
+      --bg-alt:        #191D21;
+      --surface:       #1E2328;
+      --text:          #F6F3EE;
+      --text-muted:    rgba(246,243,238,0.64);
+      --text-soft:     rgba(246,243,238,0.40);
+      --border:        rgba(246,243,238,0.12);
+      --border-strong: rgba(246,243,238,0.30);
+      --nav-bg:        rgba(20,23,26,0.90);
+      --ph-bg:         #1B1F23;
+      --shadow-card:   rgba(0,0,0,0.60);
+      --hero-glow-1:   rgba(45,99,109,0.22);
+      --hero-glow-2:   rgba(192,148,100,0.10);
+
+      /* Services flashlight glow — dark hero: the Stripe look; brighter wash,
+         slightly dimmer baseline so the raking light has range */
+      --glow-size:       260px;
+      --glow-ring:       0.35;
+      --glow-ring-hover: 0.95;
+      --glow-wash:       0.16;
+    }
+
+    /* ── ACCENT AXIS — hue + both-ground legible text variants (Option 7 palette §4) ── */
+    :root, html[data-accent="peru"] {
+      --accent:            #C09464;                 /* gold graphic */
+      --accent-soft:       rgba(192,148,100,0.28);
+      --btn-bg:            #C09464;
+      --btn-text:          #14171A;                 /* ink on gold */
+      --accent-text-light: #8C6A3C;                 /* bronze — AA on paper */
+      --accent-text-dark:  #C09464;
+    }
+    html[data-accent="slate"] {
+      --accent:            #2D636D;
+      --accent-soft:       rgba(45,99,109,0.30);
+      --btn-bg:            #2D636D;
+      --btn-text:          #F6F3EE;                 /* paper on slate */
+      --accent-text-light: #285A63;
+      --accent-text-dark:  #7FB0BA;
+    }
+    html[data-accent="sienna"] {
+      --accent:            #885B42;
+      --accent-soft:       rgba(136,91,66,0.30);
+      --btn-bg:            #885B42;
+      --btn-text:          #F6F3EE;                 /* paper on sienna */
+      --accent-text-light: #7A4F38;
+      --accent-text-dark:  #C39A80;
+    }
+    /* Resolve the text-accent for the active ground */
+    :root, html[data-hero="light"] { --accent-text: var(--accent-text-light); }
+    html[data-hero="dark"]         { --accent-text: var(--accent-text-dark); }
+
+    /* ── FONT AXIS ── */
+    :root, html[data-font="dir1"]     { --serif: 'Cormorant Garamond', Georgia, serif; --sans: 'DM Sans', -apple-system, 'Segoe UI', sans-serif; }
+    html[data-font="playfair"]        { --serif: 'Playfair Display', Georgia, serif;   --sans: 'Source Sans 3', -apple-system, 'Segoe UI', sans-serif; }
+    html[data-font="lora"]            { --serif: 'Lora', Georgia, serif;                --sans: 'Nunito Sans', -apple-system, 'Segoe UI', sans-serif; }
+
+    /* Theme-switch fade — applied briefly by JS so it never clobbers component transitions */
+    html.theme-fade, html.theme-fade *, html.theme-fade *::before, html.theme-fade *::after {
+      transition: background-color 0.4s var(--ease), color 0.4s var(--ease),
+                  border-color 0.4s var(--ease), fill 0.4s var(--ease),
+                  stroke 0.4s var(--ease), box-shadow 0.4s var(--ease) !important;
+      transition-delay: 0s !important;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      font-weight: 400;
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--text);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 { font-family: var(--serif); font-weight: 500; line-height: 1.1; letter-spacing: -0.01em; color: var(--text); }
+    a { color: var(--accent-text); text-decoration: none; }
+    a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, summary:focus-visible, [tabindex]:focus-visible {
+      outline: 2.5px solid var(--accent-text);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+    ::selection { background: var(--accent-soft); }
+
+    .eyebrow {
+      font-family: var(--sans);
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      display: inline-block; color: var(--accent-text);
+    }
+    .serif-heading { font-size: clamp(2rem, 3.8vw, 2.9rem); margin: 0.9rem 0 1.2rem; }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-family: var(--sans);
+      font-size: 0.76rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 0.95rem 1.9rem; cursor: pointer;
+      border: 1px solid transparent;
+      transition: background 0.3s var(--ease), color 0.3s var(--ease),
+                  border-color 0.3s var(--ease), transform 0.3s var(--ease),
+                  box-shadow 0.3s var(--ease);
+      white-space: nowrap;
+    }
+    .btn svg { width: 15px; height: 15px; transition: transform 0.3s var(--ease); }
+    .btn-primary { background: var(--btn-bg); color: var(--btn-text); box-shadow: 0 10px 26px -14px var(--accent-soft); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 32px -14px var(--accent-soft); }
+    .btn-primary:hover svg { transform: translateX(4px); }
+    .btn-primary:active { transform: translateY(0) scale(0.98); transition-duration: 0.1s; }
+    .btn-ghost { background: transparent; color: var(--text); border-color: var(--border-strong); }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent-text); }
+
+    /* ════════════════════════════════════════════════════════════════
+       NAV — receives the travelling monogram
+       ════════════════════════════════════════════════════════════════ */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: var(--nav-h);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 clamp(1.25rem, 5vw, 4rem);
+      background: transparent; border-bottom: 1px solid transparent;
+      transition: background 0.4s var(--ease), border-color 0.4s var(--ease);
+    }
+    nav.solid {
+      background: var(--nav-bg);
+      backdrop-filter: saturate(160%) blur(12px);
+      -webkit-backdrop-filter: saturate(160%) blur(12px);
+      border-bottom-color: var(--accent-soft);
+    }
+    .nav-logo-slot { display: block; height: 56px; }
+    .nav-logo-slot img { height: 56px; width: auto; display: block; visibility: hidden; }
+    body.static-logo .nav-logo-slot img { visibility: visible; }
+    .nav-links { display: flex; align-items: center; gap: 2.2rem; list-style: none; }
+    .nav-links a:not(.btn) {
+      font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--text); position: relative; padding: 0.3rem 0;
+    }
+    .nav-links a:not(.btn)::after {
+      content: ""; position: absolute; left: 0; bottom: -1px;
+      width: 0; height: 1px; background: var(--accent); transition: width 0.3s var(--ease);
+    }
+    .nav-links a:not(.btn):hover { color: var(--accent-text); }
+    .nav-links a:not(.btn):hover::after { width: 100%; }
+    .nav-links .btn { padding: 0.6rem 1.3rem; font-size: 0.68rem; }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; color: var(--text); padding: 0.35rem; }
+    .nav-toggle svg { width: 28px; height: 28px; }
+
+    /* ── MOBILE MENU ── */
+    .mobile-menu {
+      position: fixed; inset: 0; z-index: 220; background: var(--bg);
+      display: flex; flex-direction: column;
+      padding: 1.25rem clamp(1.25rem, 6vw, 3rem) 3rem;
+      transform: translateX(100%); transition: transform 0.45s var(--ease); visibility: hidden;
+    }
+    .mobile-menu.open { transform: translateX(0); visibility: visible; }
+    .mobile-menu-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem; }
+    .mobile-menu-top img { height: 48px; width: auto; }
+    .mobile-menu a:not(.btn) {
+      font-family: var(--serif); font-size: 2.1rem; color: var(--text);
+      padding: 0.65rem 0; border-bottom: 1px solid var(--border);
+    }
+    .mobile-menu a:not(.btn):hover { color: var(--accent-text); }
+    .mobile-menu .btn { margin-top: 2.25rem; justify-content: center; }
+    .nav-close { background: none; border: none; cursor: pointer; color: var(--text); }
+    .nav-close svg { width: 30px; height: 30px; }
+
+    /* ════════════════════════════════════════════════════════════════
+       ★ TRAVELLING MONOGRAM — hero centre → nav slot (the §3 Home logo-drop)
+       ════════════════════════════════════════════════════════════════ */
+    #traveller { position: fixed; top: 0; left: 0; z-index: 110; transform-origin: top left; will-change: transform; pointer-events: auto; }
+    #traveller img { width: 100%; height: auto; display: block; }
+    body.static-logo #traveller { display: none; }
+    /* §3 Home #1 + #4: hero shows the full lockup (monogram + subtitle stacked),
+       but ONLY the compact monogram travels into the nav (PDF p2, "Movement from
+       direction 4"). The subtitle line never travels — at nav size it would be
+       an illegible smudge. */
+    .monogram-anchor { width: clamp(240px, 34vw, 420px); margin: 0 auto 2.2rem; }
+    .monogram-anchor .anchor-twin { width: 100%; height: auto; display: block; visibility: hidden; }
+    body.static-logo .monogram-anchor .anchor-twin { visibility: visible; }
+    .hero-subtitle { display: block; width: 86.9%; height: auto; margin: 0.6rem auto 0; } /* 399/459 = subtitle:monogram width in the source lockup */
+
+    /* ── LOGO RENDERING ──
+       The supplied DJH Logo.png ships an OPAQUE WHITE background (would show a
+       white box on the cream page). Two transparent derivatives are generated
+       from it — DJH-logo-ink.png (ink lettering) and DJH-logo-paper.png (paper
+       lettering) — both boxless. Light hero uses ink; dark hero swaps to paper
+       (JS). The always-ink footer uses paper directly. This satisfies §3's
+       "remove the background so the logo blends into the page" and, using one
+       matched full lockup for both themes, also resolves gap #9. */
+
+    /* ════════════════════════════════════════════════════════════════
+       HERO (Home)
+       ════════════════════════════════════════════════════════════════ */
+    #hero {
+      min-height: 92vh;
+      background:
+        radial-gradient(110% 80% at 50% -20%, var(--hero-glow-1) 0%, transparent 55%),
+        radial-gradient(80% 60% at 85% 110%, var(--hero-glow-2) 0%, transparent 60%),
+        var(--bg);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center;
+      padding: calc(var(--nav-h) + 3rem) clamp(1.25rem, 5vw, 4rem) 5rem;
+      position: relative;
+    }
+    .hero-eyebrow { margin-bottom: 1.1rem; }
+    .hero-motto {
+      font-family: var(--serif); font-style: italic; font-weight: 500;
+      font-size: clamp(2.6rem, 6vw, 4.6rem);
+      color: var(--text); line-height: 1.05; letter-spacing: -0.015em;
+      max-width: 18ch; margin: 0 auto 1.4rem;
+    }
+    .hero-motto .champ { color: var(--accent-text); }
+    .hero-sub { font-size: 1.02rem; font-weight: 300; color: var(--text-muted); max-width: 560px; margin: 0 auto 2.6rem; line-height: 1.8; }
+    .hero-cta { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+    .hero-scroll-hint {
+      position: absolute; bottom: 2.2rem; left: 50%; transform: translateX(-50%);
+      color: var(--text-soft); display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+      font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase;
+    }
+    .hero-scroll-hint svg { width: 16px; height: 16px; stroke: var(--accent); animation: drift 2.4s var(--ease) infinite; }
+    @keyframes drift { 0%,100% { transform: translateY(0); opacity: 0.9; } 50% { transform: translateY(6px); opacity: 0.4; } }
+    .h-in { opacity: 0; transform: translateY(18px); transition: opacity 1s var(--ease), transform 1s var(--ease); }
+    body.hero-loaded .h-in { opacity: 1; transform: none; }
+    body.hero-loaded .hero-motto { transition-delay: 0.1s; }
+    body.hero-loaded .hero-sub { transition-delay: 0.22s; }
+    body.hero-loaded .hero-cta { transition-delay: 0.34s; }
+
+    /* ════════════════════════════════════════════════════════════════
+       ABOUT — Dir-4 narrated scroll (story)
+       ════════════════════════════════════════════════════════════════ */
+    #about { background: var(--bg-alt); padding: clamp(5rem, 10vw, 8rem) clamp(1.25rem, 5vw, 4rem); }
+    .story-inner { max-width: var(--maxw); margin: 0 auto; display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(3rem, 6vw, 5.5rem); }
+    .story-intro { position: sticky; top: calc(var(--nav-h) + 3rem); align-self: start; }
+    .story-lede { font-size: 1.06rem; line-height: 1.85; color: var(--text-muted); margin-bottom: 2.2rem; max-width: 46ch; }
+    .story-img { position: relative; aspect-ratio: 4 / 3; will-change: transform; overflow: hidden; background: var(--ph-bg); isolation: isolate; }
+    .story-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .story-img::after { content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none; background: linear-gradient(135deg, rgba(20,23,26,0.30), var(--accent-soft)); mix-blend-mode: multiply; }
+    .img-ph { position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.6rem;
+      background: repeating-linear-gradient(45deg, var(--accent-soft) 0 12px, transparent 12px 24px), var(--ph-bg); }
+    .img-ph svg { width: 30px; height: 30px; stroke: var(--accent-text); }
+    .img-ph span { font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-text); font-weight: 600; text-align: center; padding: 0 1rem; }
+    .img-ph .ph-note { font-size: 0.58rem; letter-spacing: 0.08em; opacity: 0.75; text-transform: none; }
+
+    .story-beats { position: relative; padding-left: 2.6rem; }
+    .thread { position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: var(--border); }
+    .thread-fill { position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: linear-gradient(180deg, var(--accent) 0%, var(--accent) 70%, var(--accent-soft) 100%); transform-origin: top; transform: scaleY(0); }
+    .beat { position: relative; padding: 1.6rem 0; }
+    .beat + .beat { border-top: 1px solid var(--border); }
+    .beat::before { content: ""; position: absolute; left: -2.6rem; top: 2.05rem; width: 9px; height: 9px; margin-left: -4px; border-radius: 50%; background: var(--bg-alt); border: 1.5px solid var(--border-strong); transition: background 0.5s var(--ease), border-color 0.5s var(--ease), box-shadow 0.5s var(--ease); }
+    .beat.visible::before { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 0 5px var(--accent-soft); }
+    .beat-num { font-family: var(--serif); font-size: clamp(1.9rem, 3vw, 2.5rem); color: var(--text); line-height: 1; margin-bottom: 0.3rem; }
+    .beat-num em { font-style: normal; color: var(--accent-text); }
+    .beat-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-text); }
+    .beat-body { opacity: 0; transform: translateY(16px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+    .beat.visible .beat-body { opacity: 1; transform: none; }
+
+    /* ════════════════════════════════════════════════════════════════
+       SERVICES — Dir-2 bordered grid, hover-invert (base: Direction 2)
+       ════════════════════════════════════════════════════════════════ */
+    #services { background: var(--bg); padding: clamp(5rem, 10vw, 8rem) clamp(1.25rem, 5vw, 4rem); }
+    .services-inner { max-width: var(--maxw); margin: 0 auto; }
+    .services-head { max-width: 640px; margin-bottom: 3rem; }
+    .services-head p { color: var(--text-muted); font-size: 1.02rem; }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      border-top: 1px solid var(--border); border-left: 1px solid var(--border); }
+    .service-card { padding: 2.1rem 1.85rem; position: relative;
+      border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      overflow: hidden; }
+    .service-card .s-icon { width: 46px; height: 46px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.15rem; }
+    .service-card .s-icon svg { width: 26px; height: 26px; stroke: var(--accent-2); transition: stroke 0.3s var(--ease); }
+    html[data-hero="dark"] .service-card .s-icon svg { stroke: var(--accent-text); }
+    .service-card h4 { font-size: 1.3rem; color: var(--text); margin-bottom: 0.5rem; }
+    .service-card p { font-size: 0.9rem; line-height: 1.6; color: var(--text-muted); }
+    .service-card:hover .s-icon svg { stroke: var(--accent-text); }
+
+    /* ── FLASHLIGHT GLOW (Stripe-style masked border + cursor tracking) ──
+       One pointermove listener on the grid sets --mx/--my (px) on EVERY card,
+       so edges glow even when the cursor is over a neighbour and the light
+       rakes continuously across the grid. ::before = 1px border ring (the
+       radial gradient is masked to the card's 1px padding ring — never a
+       animated border property); ::after = faint surface wash behind the
+       content, hover-only. JS only writes CSS variables; without JS the
+       vars fall back to 50%/50% = a static centred baseline ring, and the
+       cards stay fully usable. Text never inverts. Glow colour rides the
+       accent token, so the accent toggle recolours it automatically. */
+    .service-card > * { position: relative; z-index: 1; }
+    .service-card::before {   /* border ring */
+      content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+      padding: 1px;
+      background: radial-gradient(var(--glow-size) circle at var(--mx, 50%) var(--my, 50%), var(--accent) 0%, transparent 70%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+              mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+              mask-composite: exclude;
+      opacity: var(--glow-ring);
+      transition: opacity 0.4s var(--ease);
+    }
+    .service-card:hover::before { opacity: var(--glow-ring-hover); }
+    .service-card::after {     /* surface wash */
+      content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background: radial-gradient(calc(var(--glow-size) * 1.6) circle at var(--mx, 50%) var(--my, 50%), var(--accent) 0%, transparent 65%);
+      opacity: 0;
+      transition: opacity 0.4s var(--ease);
+    }
+    .service-card:hover::after { opacity: var(--glow-wash); }
+    /* travelling light off under reduced motion — static hover ring only */
+    @media (prefers-reduced-motion: reduce) {
+      .service-card::before, .service-card::after,
+      .team-avatar::before, .team-avatar::after {
+        background: radial-gradient(var(--glow-size) circle at 50% 50%, var(--accent) 0%, transparent 70%);
+      }
+    }
+
+    /* ════════════════════════════════════════════════════════════════
+       TEAM — Dir-2 tiles, light in default theme (base: Direction 2)
+       ════════════════════════════════════════════════════════════════ */
+    #team { background: var(--bg-alt); padding: clamp(5rem, 10vw, 8rem) clamp(1.25rem, 5vw, 4rem); }
+    .team-inner { max-width: var(--maxw); margin: 0 auto; }
+    .team-head { margin-bottom: 3rem; max-width: 560px; }
+    .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2.75rem 2rem; }
+    .team-card { display: flex; flex-direction: column; }
+    .team-avatar { width: 100%; aspect-ratio: 1 / 1; max-width: 240px; position: relative; border: 1.5px solid var(--accent); margin: 0 auto 1.3rem; overflow: hidden; background: var(--surface);
+      transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease); }
+    .team-avatar .initials { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 2.6rem; font-weight: 600; color: var(--accent-text); letter-spacing: 0.04em; }
+    .team-avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .team-card:hover .team-avatar { transform: translateY(-5px); box-shadow: 0 22px 38px -20px var(--shadow-card); }
+    /* Flashlight glow on the avatar tiles — same tokens + single-listener
+       pattern as Services. Pseudo layers only; never intercepts the card
+       click / Read-bio button (they aren't separate hit targets). */
+    .team-avatar .initials { z-index: 2; }
+    .team-avatar img { z-index: 0; }
+    .team-avatar::before {   /* border ring */
+      content: ""; position: absolute; inset: 0; z-index: 3; pointer-events: none;
+      padding: 1.5px;
+      background: radial-gradient(var(--glow-size) circle at var(--mx, 50%) var(--my, 50%), var(--accent) 0%, transparent 70%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+              mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+              mask-composite: exclude;
+      opacity: var(--glow-ring);
+      transition: opacity 0.4s var(--ease);
+    }
+    .team-card:hover .team-avatar::before { opacity: var(--glow-ring-hover); }
+    .team-avatar::after {     /* surface wash */
+      content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      background: radial-gradient(calc(var(--glow-size) * 1.3) circle at var(--mx, 50%) var(--my, 50%), var(--accent) 0%, transparent 65%);
+      opacity: 0;
+      transition: opacity 0.4s var(--ease);
+    }
+    .team-card:hover .team-avatar::after { opacity: var(--glow-wash); }
+    .team-name { font-family: var(--serif); font-size: 1.3rem; color: var(--text); margin-bottom: 0.35rem; }
+    .team-role { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-text); margin-bottom: 0.3rem; }
+    .team-qual { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.6rem; }
+    .team-qual.placeholder { color: var(--accent-text); font-weight: 600; border: 1px dashed var(--border-strong); padding: 0.15rem 0.5rem; display: inline-block; border-radius: 3px; font-size: 0.74rem; letter-spacing: 0.02em; }
+    /* Bios open in a centered modal (below) -- cards stay uniform tiles, the
+       grid never desyncs. The trigger is a real <button> for keyboard access. */
+    .team-card { cursor: pointer; }
+    .team-bio-btn {
+      margin-top: auto; border: none; border-top: 1px solid var(--border); background: none;
+      width: 100%; text-align: left; cursor: pointer; padding: 0.75rem 0 0.2rem;
+      font-family: var(--sans); font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-text);
+      display: inline-flex; align-items: center; gap: 0.4rem;
+    }
+    .team-bio-btn .chev { display: inline-flex; transition: transform 0.3s var(--ease); }
+    .team-card:hover .team-bio-btn .chev { transform: translateX(3px); }
+
+    /* -- BIO MODAL: centre-scaling dialog over a scrim; matches the site's
+       centred/symmetric axis. Surface/text ride the [data-hero] role tokens,
+       accents ride the accent token -- themed automatically on every toggle. */
+    .bio-modal {
+      position: fixed; inset: 0; z-index: 500;
+      display: flex; align-items: center; justify-content: center;
+      padding: clamp(0.75rem, 3vw, 2rem);
+    }
+    .bio-modal[hidden] { display: none; }
+    .bio-modal-scrim {
+      position: absolute; inset: 0;
+      background: rgba(20,23,26,0.6);
+      opacity: 0; transition: opacity 0.25s var(--ease);
+    }
+    .bio-modal-card {
+      position: relative; background: var(--surface); color: var(--text);
+      border: 1px solid var(--border);
+      box-shadow: 0 40px 90px -30px rgba(0,0,0,0.55);
+      width: min(640px, 100%); max-height: 85vh;
+      display: flex; flex-direction: column;
+      padding: clamp(1.4rem, 4vw, 2.5rem);
+      opacity: 0; transform: scale(0.96);
+      transition: opacity 0.25s var(--ease), transform 0.25s var(--ease);
+    }
+    .bio-modal.open .bio-modal-scrim { opacity: 1; }
+    .bio-modal.open .bio-modal-card { opacity: 1; transform: scale(1); }
+    .bio-modal-close {
+      position: absolute; top: 0.9rem; right: 0.9rem; z-index: 1;
+      width: 40px; height: 40px;
+      background: none; border: 1px solid var(--border-strong); color: var(--text);
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: border-color 0.25s var(--ease), color 0.25s var(--ease);
+    }
+    .bio-modal-close:hover { border-color: var(--accent); color: var(--accent-text); }
+    .bio-modal-close svg { width: 18px; height: 18px; }
+    .bio-modal-head { display: flex; gap: 1.25rem; align-items: center; margin-bottom: 1.15rem; padding-right: 3rem; flex-shrink: 0; }
+    .bio-modal-avatar {
+      width: 86px; height: 86px; flex-shrink: 0; position: relative;
+      border: 1.5px solid var(--accent); background: var(--bg-alt);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .bio-modal-avatar .initials { font-family: var(--serif); font-size: 1.9rem; font-weight: 600; color: var(--accent-text); letter-spacing: 0.04em; }
+    .bio-modal-head h3 { font-size: clamp(1.35rem, 3vw, 1.7rem); margin-bottom: 0.3rem; }
+    .bio-modal-body { overflow-y: auto; font-size: 0.95rem; line-height: 1.8; color: var(--text-muted); padding-right: 0.4rem; }
+    @media (max-width: 520px) {
+      .bio-modal { padding: 0.5rem; }
+      .bio-modal-card { max-height: 94vh; width: 100%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bio-modal-scrim, .bio-modal-card { transition: none; }
+    }
+
+    /* ════════════════════════════════════════════════════════════════
+       REVIEWS — Dir-4 band → photo bg + carousel scaffold (base: Direction 4)
+       ════════════════════════════════════════════════════════════════ */
+    #reviews { position: relative; overflow: hidden; color: var(--paper); padding: clamp(5rem, 10vw, 7.5rem) clamp(1.25rem, 5vw, 4rem); isolation: isolate; }
+    .reviews-bg { position: absolute; inset: 0; z-index: -2; }
+    .reviews-bg .img-ph { background: repeating-linear-gradient(45deg, rgba(199,160,106,0.08) 0 14px, transparent 14px 28px), #232a2b; }
+    .reviews-bg .img-ph svg, .reviews-bg .img-ph span { color: var(--paper-60); stroke: var(--paper-60); }
+    .reviews-overlay { position: absolute; inset: 0; z-index: -1; background:
+      radial-gradient(90% 100% at 15% 0%, rgba(20,23,26,0.55) 0%, transparent 60%),
+      linear-gradient(180deg, rgba(20,23,26,0.55), rgba(45,99,109,0.62)); }
+    .reviews-inner { max-width: 820px; margin: 0 auto; text-align: center; }
+    .reviews-count { font-family: var(--serif); font-size: clamp(4rem, 9vw, 6.5rem); color: var(--accent); line-height: 1; margin-bottom: 0.4rem; }
+    .reviews-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--paper-60); margin-bottom: 1.6rem; }
+    .stars { display: flex; justify-content: center; gap: 0.45rem; margin-bottom: 2.4rem; }
+    .stars svg { width: 22px; height: 22px; fill: var(--accent); stroke: none; opacity: 0; transform: scale(0.4); transition: opacity 0.45s var(--ease), transform 0.45s var(--ease); }
+    .stars.lit svg { opacity: 1; transform: scale(1); }
+    .stars.lit svg:nth-child(1){transition-delay:.05s}.stars.lit svg:nth-child(2){transition-delay:.17s}.stars.lit svg:nth-child(3){transition-delay:.29s}.stars.lit svg:nth-child(4){transition-delay:.41s}.stars.lit svg:nth-child(5){transition-delay:.53s}
+
+    /* Carousel: track of slides; the review text sits in a semi-transparent centred block */
+    .carousel { position: relative; }
+    .carousel-viewport { overflow: hidden; }
+    .carousel-track { display: flex; transition: transform 0.5s var(--ease); }
+    .carousel-slide { flex: 0 0 100%; padding: 0 0.5rem; }
+    .review-block { background: rgba(20,23,26,0.55); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); border: 1px solid rgba(246,243,238,0.14); padding: clamp(1.75rem, 4vw, 2.75rem); max-width: 680px; margin: 0 auto; }
+    .review-quote { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: clamp(1.3rem, 2.6vw, 1.8rem); line-height: 1.5; color: var(--paper); margin-bottom: 1.4rem; }
+    .review-attr { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); }
+    /* Arrows + dots hidden until ≥2 real reviews (JS reveals when slide count > 1) */
+    .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 3; width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(246,243,238,0.3); background: rgba(20,23,26,0.4); color: var(--paper); cursor: pointer; display: none; align-items: center; justify-content: center; }
+    .carousel-btn:hover { background: rgba(20,23,26,0.7); border-color: var(--accent); }
+    .carousel-btn svg { width: 20px; height: 20px; }
+    .carousel-btn.prev { left: -8px; } .carousel-btn.next { right: -8px; }
+    .carousel-dots { display: none; justify-content: center; gap: 0.5rem; margin-top: 1.75rem; }
+    .carousel-dots button { width: 9px; height: 9px; border-radius: 50%; border: none; background: rgba(246,243,238,0.35); cursor: pointer; padding: 0; }
+    .carousel-dots button.active { background: var(--accent); }
+    .carousel.multi .carousel-btn { display: inline-flex; }
+    .carousel.multi .carousel-dots { display: flex; }
+    .reviews-src { margin-top: 1.75rem; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; }
+    .reviews-src a { color: var(--paper-60); border-bottom: 1px solid rgba(246,243,238,0.3); }
+    .reviews-src a:hover { color: var(--paper); }
+
+    /* ════════════════════════════════════════════════════════════════
+       CONTACT — Dir-1 (base: Direction 1)
+       ════════════════════════════════════════════════════════════════ */
+    #contact { background: var(--bg); padding: clamp(5rem, 10vw, 8rem) clamp(1.25rem, 5vw, 4rem); }
+    .contact-inner { max-width: var(--maxw); margin: 0 auto; display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(2.5rem, 6vw, 5rem); align-items: start; }
+    .contact-head p { color: var(--text-muted); margin-bottom: 2rem; max-width: 40ch; }
+    /* Dir-1 heading: "hear" in italic accent; sized to hold one line at desktop, balanced wrap below */
+    #contact .serif-heading { font-size: clamp(1.9rem, 3.4vw, 2.5rem); text-wrap: balance; }
+    #contact .serif-heading em { font-style: italic; color: var(--accent-text); }
+    /* Dir-1 fidelity: circular filled icon chip, small-caps letterspaced label,
+       value below, tight vertical rhythm; colours run through role/accent tokens */
+    .contact-list { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 2rem; }
+    .c-row { display: flex; gap: 1rem; align-items: flex-start; }
+    .c-icon { width: 42px; height: 42px; flex-shrink: 0; border-radius: 50%; border: 1px solid var(--border); background: var(--bg-alt); display: flex; align-items: center; justify-content: center; color: var(--accent-text); }
+    .c-icon svg { width: 19px; height: 19px; }
+    .c-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-text); margin-bottom: 0.15rem; }
+    .c-value { font-size: 0.975rem; color: var(--text); line-height: 1.55; }
+    .c-value a { color: var(--text); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; text-decoration-color: var(--border-strong); transition: text-decoration-color 0.25s var(--ease), color 0.25s var(--ease); }
+    .c-value a:hover { color: var(--accent-text); text-decoration-color: var(--accent); }
+
+    .social-row { display: flex; align-items: center; gap: 0.7rem; margin-top: 2rem; flex-wrap: wrap; }
+    .social-row .s-link { width: 40px; height: 40px; border: 1px solid var(--border-strong); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text); transition: color 0.25s var(--ease), border-color 0.25s var(--ease); }
+    .social-row .s-link:hover { color: var(--accent-text); border-color: var(--accent); }
+    .social-row .s-link svg { width: 18px; height: 18px; }
+    .social-tbc { width: 100%; font-size: 0.66rem; letter-spacing: 0.06em; color: var(--text-soft); text-transform: uppercase; margin-top: 0.1rem; }
+
+    .contact-col { display: flex; flex-direction: column; gap: 1.5rem; }
+    /* Form card is an ink panel in BOTH themes — a deliberate anchor of the dark identity */
+    .contact-form { background: var(--ink); padding: clamp(1.6rem, 3vw, 2.4rem); display: flex; flex-direction: column; gap: 1.05rem; box-shadow: 0 36px 70px -38px var(--shadow-card); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; }
+    .field label { display: block; font-size: 0.62rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem; }
+    .field input, .field textarea { width: 100%; padding: 0.8rem 1rem; background: rgba(246,243,238,0.06); border: 1px solid rgba(246,243,238,0.16); color: var(--paper); font-family: var(--sans); font-size: 0.94rem; transition: border-color 0.25s var(--ease), background 0.25s var(--ease); }
+    .field input::placeholder, .field textarea::placeholder { color: rgba(246,243,238,0.32); }
+    .field input:focus, .field textarea:focus { outline: none; border-color: var(--accent); background: rgba(246,243,238,0.1); }
+    .field textarea { min-height: 104px; resize: vertical; }          /* §3 Contact #2: form slightly smaller to make room for photo */
+    .contact-form .btn { align-self: flex-start; margin-top: 0.3rem; }
+    .contact-photo { aspect-ratio: 16 / 7; position: relative; overflow: hidden; background: var(--ph-bg); isolation: isolate; }
+    /* Full-width Google Maps embed band below the grid. Google's iframe stays
+       light in dark hero (accepted) — framed with border/shadow so it reads as
+       an intentional window. Sharp corners match the form/photo cards. */
+    .contact-map { max-width: var(--maxw); margin: clamp(2.5rem, 5vw, 3.5rem) auto 0; border: 1px solid var(--border); box-shadow: 0 20px 50px -30px var(--shadow-card); background: var(--surface); overflow: hidden; }
+    .contact-map iframe { display: block; width: 100%; height: 400px; border: 0; }
+    @media (max-width: 520px) { .contact-map iframe { height: 300px; } }
+
+    /* ════════════════════════════════════════════════════════════════
+       FOOTER — ink anchor in both themes
+       ════════════════════════════════════════════════════════════════ */
+    footer { background: var(--ink); color: var(--paper-60); padding: clamp(3.25rem, 6vw, 4.5rem) clamp(1.25rem, 5vw, 4rem) 2rem; font-size: 0.86rem; }
+    .footer-inner { max-width: var(--maxw); margin: 0 auto; display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 2.5rem; padding-bottom: 2.5rem; border-bottom: 1px solid rgba(246,243,238,0.08); }
+    .footer-brand img { height: 52px; width: auto; margin-bottom: 1.15rem; }
+    .footer-firm { font-family: var(--firm-serif); font-size: 1.2rem; color: var(--paper); line-height: 1.35; margin-bottom: 0.5rem; }  /* §3 Contact #6: firm name = logo (Cormorant) */
+    .footer-brand > p { color: var(--paper-60); }
+    .footer-col h5 { font-family: var(--sans); font-size: 0.64rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.05rem; }
+    .footer-col a, .footer-col p { color: var(--paper-60); display: block; margin-bottom: 0.55rem; line-height: 1.55; }
+    .footer-col a:hover { color: var(--accent); }
+    .footer-bottom { max-width: var(--maxw); margin: 1.8rem auto 0; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.75rem; font-size: 0.74rem; color: var(--paper-30); }
+
+    /* ── REVEALS ── */
+    .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.85s var(--ease), transform 0.85s var(--ease); }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-stagger > * { opacity: 0; transform: translateY(20px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+    .reveal-stagger.visible > * { opacity: 1; transform: none; }
+
+    /* ════════════════════════════════════════════════════════════════
+       CUSTOMIZER PANEL — the tool chrome (own fixed palette, always legible)
+       ════════════════════════════════════════════════════════════════ */
+    .cz-panel {
+      position: fixed; z-index: 400; right: 1.1rem; bottom: 1.1rem;
+      width: min(320px, calc(100vw - 2rem));
+      background: #14171A; color: #F6F3EE;
+      border: 1px solid rgba(246,243,238,0.16); border-radius: 12px;
+      box-shadow: 0 30px 60px -24px rgba(0,0,0,0.7);
+      font-family: 'Inter', -apple-system, 'Segoe UI', sans-serif;
+      transform: translateY(0); transition: transform 0.4s var(--ease);
+    }
+    .cz-head { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 0.9rem 1.1rem; border-bottom: 1px solid rgba(246,243,238,0.12); }
+    .cz-title { display: flex; align-items: center; gap: 0.55rem; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #C09464; }
+    .cz-title svg { width: 16px; height: 16px; }
+    .cz-collapse { background: none; border: none; color: #F6F3EE; cursor: pointer; padding: 0.2rem; display: inline-flex; }
+    .cz-collapse svg { width: 20px; height: 20px; transition: transform 0.3s var(--ease); }
+    .cz-body { padding: 1rem 1.1rem 1.15rem; }
+    .cz-group { margin-bottom: 1rem; }
+    .cz-group:last-of-type { margin-bottom: 0.5rem; }
+    .cz-legend { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(246,243,238,0.55); margin-bottom: 0.45rem; }
+    .cz-seg { display: flex; gap: 4px; background: rgba(246,243,238,0.06); border: 1px solid rgba(246,243,238,0.12); border-radius: 8px; padding: 4px; }
+    .cz-opt { flex: 1; font-family: inherit; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.02em; padding: 0.5rem 0.35rem; border-radius: 5px; border: none; background: transparent; color: rgba(246,243,238,0.6); cursor: pointer; transition: background 0.25s var(--ease), color 0.25s var(--ease); white-space: nowrap; }
+    .cz-opt:hover { color: #F6F3EE; }
+    .cz-opt[aria-pressed="true"] { background: #C09464; color: #14171A; }
+    .cz-swatch { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 5px; vertical-align: middle; }
+    .cz-reset { width: 100%; margin-top: 0.85rem; font-family: inherit; font-size: 0.66rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.6rem; border-radius: 7px; border: 1px solid rgba(246,243,238,0.25); background: transparent; color: #F6F3EE; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem; transition: border-color 0.25s var(--ease), background 0.25s var(--ease); }
+    .cz-reset:hover { border-color: #C09464; background: rgba(192,148,100,0.12); }
+    .cz-reset svg { width: 14px; height: 14px; }
+    .cz-share { margin-top: 1rem; padding-top: 0.85rem; border-top: 1px solid rgba(246,243,238,0.12); }
+    .cz-state { font-size: 0.8rem; font-weight: 600; color: #F6F3EE; margin: 0 0 0.6rem; letter-spacing: 0.02em; }
+    .cz-copy { width: 100%; font-family: inherit; font-size: 0.66rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.6rem; border-radius: 7px; border: 1px solid #C09464; background: #C09464; color: #14171A; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem; transition: background 0.25s var(--ease), border-color 0.25s var(--ease); }
+    .cz-copy:hover { background: #D2AD83; border-color: #D2AD83; }
+    .cz-copy svg { width: 14px; height: 14px; }
+    .cz-panel.collapsed { transform: translateY(calc(100% - 46px)); }
+    .cz-panel.collapsed .cz-collapse svg { transform: rotate(180deg); }
+    .cz-panel:focus-visible, .cz-opt:focus-visible, .cz-reset:focus-visible, .cz-collapse:focus-visible { outline: 2.5px solid #C09464; outline-offset: 2px; }
+
+    /* ════════════════════════════════════════════════════════════════
+       RESPONSIVE
+       ════════════════════════════════════════════════════════════════ */
+    @media (max-width: 960px) {
+      .story-inner { grid-template-columns: 1fr; }
+      .story-intro { position: static; }
+      .contact-inner { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-toggle { display: inline-flex; }
+      .monogram-anchor { width: clamp(170px, 42vw, 240px); }
+    }
+    @media (max-width: 520px) {
+      .form-row { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .services-grid { grid-template-columns: 1fr; }
+      .cz-panel { right: 0.6rem; bottom: 0.6rem; left: 0.6rem; width: auto; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+      .reveal, .reveal-stagger > *, .h-in, .beat-body { opacity: 1 !important; transform: none !important; }
+      .stars svg { opacity: 1 !important; transform: none !important; }
+      .thread-fill { transform: none !important; }
+      .hero-scroll-hint svg { animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ NAV ══ -->
+  <nav id="nav" aria-label="Main navigation">
+    <a class="nav-logo-slot" id="navSlot" href="#hero" aria-label="DJH Attorneys home">
+      <img src="./assets/DJH-monogram-ink.png" data-ink="./assets/DJH-monogram-ink.png" data-paper="./assets/DJH-monogram-paper.png" alt="De Jager Hattingh Attorneys" id="slotImg" class="logo-themed" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#team">Our Professionals</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#contact" class="btn btn-primary">Get in Touch</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+    </button>
+  </nav>
+
+  <!-- ══ MOBILE MENU ══ -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <div class="mobile-menu-top">
+      <img src="./assets/DJH-monogram-ink.png" data-ink="./assets/DJH-monogram-ink.png" data-paper="./assets/DJH-monogram-paper.png" alt="De Jager Hattingh Attorneys" class="logo-themed" />
+      <button class="nav-close" id="navClose" aria-label="Close menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+    </div>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#team">Our Professionals</a>
+    <a href="#contact">Contact</a>
+    <a href="#contact" class="btn btn-primary">Get in Touch</a>
+  </div>
+
+  <!-- ★ THE TRAVELLING MONOGRAM (fixed; JS interpolates hero → nav) -->
+  <a id="traveller" href="#hero" aria-label="DJH Attorneys home">
+    <img src="./assets/DJH-monogram-ink.png" data-ink="./assets/DJH-monogram-ink.png" data-paper="./assets/DJH-monogram-paper.png" alt="" aria-hidden="true" id="travImg" class="logo-themed" />
+  </a>
+
+  <!-- ══ HERO (Home) ══ -->
+  <header id="hero">
+    <div class="monogram-anchor" id="monogramAnchor">
+      <img src="./assets/DJH-monogram-ink.png" data-ink="./assets/DJH-monogram-ink.png" data-paper="./assets/DJH-monogram-paper.png" alt="De Jager Hattingh Attorneys monogram" class="logo-themed anchor-twin" />
+      <img src="./assets/DJH-subtitle-ink.png" data-ink="./assets/DJH-subtitle-ink.png" data-paper="./assets/DJH-subtitle-paper.png" alt="Attorneys, Notaries &amp; Conveyancers" class="logo-themed hero-subtitle" />
+    </div>
+    <span class="eyebrow hero-eyebrow h-in">De Jager Hattingh · Attorneys, Notaries &amp; Conveyancers</span>
+    <h1 class="hero-motto h-in">Not your <span class="champ">average</span> lawyers.</h1>
+    <p class="hero-sub h-in">A 100% female-owned boutique law firm in Middelburg, Mpumalanga, providing practical, tailored legal advice rather than one-size-fits-all solutions.</p>
+    <div class="hero-cta h-in">
+      <a href="#contact" class="btn btn-primary">
+        Get in Touch
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+      <a href="#services" class="btn btn-ghost">Our Services</a>
+    </div>
+    <div class="hero-scroll-hint" aria-hidden="true">
+      <span>Scroll</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ══ ABOUT — narrated scroll (base: Direction 4) ══ -->
+    <section id="about" aria-label="About the firm">
+      <div class="story-inner">
+        <div class="story-intro reveal">
+          <span class="eyebrow">Our Story</span>
+          <!-- §3 About #1: heading = Dir-2 "Precision. Purpose. Personal.", all three words in --text (black on light) -->
+          <h2 class="serif-heading">Precision. Purpose. Personal.</h2>
+          <!-- §3 About #2: intro replaced verbatim -->
+          <p class="story-lede">What began as an overnight decision in 2022 has grown into a successful and steadily expanding boutique law firm. Led by director Mignon de Jager Hattingh, a seasoned attorney specialising in commercial law and contracts, the firm is built on hard work, dedication, and a commitment to achieving the best possible outcomes for its clients. The DJH team provides practical, tailored legal advice, recognising that every client and every matter is unique.</p>
+          <div class="story-img">
+            <div class="img-ph" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+              <span>Placeholder image<span class="ph-note"> · photoshoot asset pending</span></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="story-beats" id="storyBeats">
+          <div class="thread" aria-hidden="true"><span class="thread-fill" id="threadFill"></span></div>
+          <!-- §3 About #3: sub-wording beneath each point removed (kept num + label only) -->
+          <div class="beat">
+            <div class="beat-body"><p class="beat-num">20<em>22</em></p><p class="beat-label">Founded</p></div>
+          </div>
+          <div class="beat">
+            <!-- §3 About #4: "woman-owned" → "female-owned" -->
+            <div class="beat-body"><p class="beat-num">100<em>%</em></p><p class="beat-label">Female-Owned</p></div>
+          </div>
+          <div class="beat">
+            <div class="beat-body"><p class="beat-num">Multi<em>lingual</em></p><p class="beat-label">One Team, Many Languages</p></div>
+          </div>
+          <div class="beat">
+            <div class="beat-body"><p class="beat-num">100<em>+</em></p><p class="beat-label">Five-Star Google Reviews</p></div>
+          </div>
+          <div class="beat">
+            <!-- §3 About #5: "Eleven" → "Twelve" -->
+            <div class="beat-body"><p class="beat-num">Twe<em>lve</em></p><p class="beat-label">Practice Areas</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ SERVICES — bordered grid (base: Direction 2) ══ -->
+    <section id="services" aria-label="Practice areas">
+      <div class="services-inner">
+        <div class="services-head reveal">
+          <span class="eyebrow">What We Do</span>
+          <!-- §3 Services #5: sub-heading -->
+          <h2 class="serif-heading">Practice Areas</h2>
+          <p>Twelve areas of law. One standard.</p>
+        </div>
+        <div class="services-grid reveal-stagger">
+          <div class="service-card">
+            <div class="s-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg></div>
+            <h4>Civil Litigation</h4>
+            <!-- §3 Services #1: red-struck tail removed -->
+            <p>Dispute resolution and confident court representation.</p>
+          </div>
+          <div class="service-card">
+            <div class="s-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+            <h4>Family Law</h4>
+            <p>Divorce, maintenance, custody and domestic matters handled with sensitivity.</p>
+          </div>
+          <div class="service-card">
+            <div class="s-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg></div>
+            <h4>Contracts</h4>
+            <p>Drafting, reviewing and advising on commercial and personal agreements.</p>
+          </div>
+          <div class="service-card">
+            <div class="s-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+            <h4>Commercial Law</h4>
+            <!-- §3 Services #7 -->
+            <p>Legal advice on commercial transactions, contracts, and business matters.</p>
+          </div>
+          <div class="service-card">
+            <div class="s-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" x2="21" y1="22" y2="22"/><line x1="6" x2="6" y1="18" y2="11"/><line x1="10" x2="10" y1="18" y2="11"/><line x1="14" x2="14" y1="18" y2="11"/><line x1="18" x2="18" y1="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg></div>
+            <h4>Insolvency Law</h4>
+            <!-- §3 Services #8 (ruling #4: item-8 desc belongs to the Insolvency card, NOT Commercial) -->
+            <p>Strategic legal guidance with insolvency, business rescue, and liquidation matters.</p>
+          </div>
+          <div class="service-card">
+            <div class="s-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></svg></div>
+            <h4>Mediation &amp; Arbitration</h4>
+            <p>Cost-effective alternative dispute resolution, settled outside the courts.</p>
+          </div>
+          <div class="service-card">
+            <div class="s-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 22h14"/><path d="M19.27 13.73A2.5 2.5 0 0 0 17.5 13h-11A2.5 2.5 0 0 0 4 15.5V17a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-1.5c0-.66-.26-1.3-.73-1.77Z"/><path d="M14 13V8.5C14 7 15 7 15 5a3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 2 1 2 1 3.5V13"/></svg></div>
+            <h4>Notarial Services</h4>
+            <p>Authentication, antenuptial contracts and notarial deeds, in-house.</p>
+          </div>
+          <div class="service-card">
+            <div class="s-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 17V5a2 2 0 0 0-2-2H4"/><path d="M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3"/></svg></div>
+            <h4>Deceased Estates</h4>
+            <p>Administration and winding-up of estates, with care and efficiency.</p>
+          </div>
+          <div class="service-card">
+            <div class="s-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 12h-5"/><path d="M15 8h-5"/><path d="M19 17V5a2 2 0 0 0-2-2H4"/><path d="M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3"/></svg></div>
+            <h4>Wills</h4>
+            <p>Drafting and safekeeping of wills that protect your wishes and your family.</p>
+          </div>
+          <div class="service-card">
+            <div class="s-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+            <h4>Conveyancing</h4>
+            <p>Property transfers, bonds and registration by registered conveyancers.</p>
+          </div>
+          <div class="service-card">
+            <div class="s-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/></svg></div>
+            <h4>Correspondent Work</h4>
+            <!-- §3 Services #6 -->
+            <p>Acting as correspondent attorneys for firms nationwide, our dedicated messenger and two company vehicles enable us to provide swift, efficient assistance, particularly in urgent applications.</p>
+          </div>
+          <!-- §3 Services #3: 12th service — Debt Collection -->
+          <div class="service-card">
+            <div class="s-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="m16.71 13.88.7.71-2.82 2.82"/></svg></div>
+            <h4>Debt Collection</h4>
+            <p>Efficient recovery of outstanding debts through professional, legally compliant processes.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ TEAM — Our Professionals (base: Direction 2) ══ -->
+    <section id="team" aria-label="Our professionals">
+      <div class="team-inner">
+        <div class="team-head reveal">
+          <span class="eyebrow">The People</span>
+          <!-- §3 Team #2: "Our Team" → "Our Professionals" (nav tab also renamed above) -->
+          <h2 class="serif-heading">Our Professionals</h2>
+          <!-- §3 Team #3: red-struck sub-line removed -->
+        </div>
+        <div class="team-grid reveal-stagger">
+          <div class="team-card">
+            <div class="team-avatar"><span class="initials" aria-hidden="true">MH</span></div>
+            <p class="team-name">Mignon de Jager Hattingh</p>
+            <p class="team-role">Director · Notary</p>
+            <p class="team-qual">LLB, NWU</p>
+            <div class="team-bio-full" hidden><p>Mignon founded the firm in 2022 with a passion for providing practical, detail-oriented legal services. She obtained her Bachelor of Laws degree from the North-West University in 2017. After completing her articles, she was admitted as an attorney and later went on to qualify as a notary. Her commitment to excellence was recognised when she achieved the highest mark in the province in the Notarial Practice examination. Mignon specialises in commercial law and has experience in a wide range of commercial matters, particularly in the mining industry. She is highly experienced in drafting, reviewing and negotiating contracts, providing clients with practical legal solutions. She believes in building long-term relationships with clients and is committed to providing each client with personal attention and practical legal solutions.</p></div>
+            <button class="team-bio-btn" type="button"><span class="chev" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>Read bio</button>
+          </div>
+          <div class="team-card">
+            <div class="team-avatar"><span class="initials" aria-hidden="true">AL</span></div>
+            <p class="team-name">Angelique Laas</p>
+            <p class="team-role">Senior Associate</p>
+            <p class="team-qual">LLB, UNISA</p>
+            <div class="team-bio-full" hidden><!-- Join date "December 2025" printed verbatim per ruling #6 (flagged for confirmation in report) -->
+              <p>Angelique, a senior attorney at the firm, obtained her LLB degree from the University of South Africa in 2013 and was admitted as an attorney in 2015. She joined the firm in December 2025, and since then, she has become an invaluable member of the team. Angelique specialises in civil litigation across a broad range of legal fields. Her extensive knowledge of civil procedure and substantive law, coupled with her strategic and meticulous approach to litigation, makes her a trusted advisor and a strong advocate for clients involved in legal disputes.</p></div>
+            <button class="team-bio-btn" type="button"><span class="chev" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>Read bio</button>
+          </div>
+          <div class="team-card">
+            <div class="team-avatar"><span class="initials" aria-hidden="true">BM</span></div>
+            <p class="team-name">Boitumelo Mphela</p>
+            <p class="team-role">Junior Associate</p>
+            <!-- §3 Team #3: "LLB"→"LLM". Held as marked placeholder per ruling #5 — literal "LLM, UFS" is factually wrong (LLM is UNISA). -->
+            <p class="team-qual placeholder" title="Awaiting DJH confirmation">CONFIRM: LLM, UNISA?</p>
+            <div class="team-bio-full" hidden><p>Boitumelo's journey with the firm began in 2024 when she joined the team as a candidate attorney. Through dedication, hard work, and valuable mentorship under Mignon's guidance, she steadily developed her skills and progressed to her current position as a junior associate. She obtained her Bachelor of Laws degree from the University of the Free State in 2022 and went on to complete her Master of Laws in corporate law through the University of South Africa in February 2026. Boitumelo has a keen interest in continuous professional development and aspires to qualify as a notary in the future. She possesses excellent research, drafting and analytical skills, enabling her to provide practical, well-considered legal solutions.</p></div>
+            <button class="team-bio-btn" type="button"><span class="chev" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>Read bio</button>
+          </div>
+          <div class="team-card">
+            <div class="team-avatar"><span class="initials" aria-hidden="true">TM</span></div>
+            <p class="team-name">Thando Mofokeng</p>
+            <p class="team-role">Professional Assistant</p>
+            <p class="team-qual">LLB, UWC</p>
+            <div class="team-bio-full" hidden><p>Thando obtained his LLB degree from the University of the Western Cape in 2021 and joined the firm in 2026. He works closely alongside Mignon, gaining valuable practical experience and further developing his legal knowledge and skills. As he continues to grow within the profession, he remains focused on building meaningful relationships with clients and delivering service of the highest standard.</p></div>
+            <button class="team-bio-btn" type="button"><span class="chev" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>Read bio</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ REVIEWS — photo bg + carousel scaffold (base: Direction 4) ══ -->
+    <section id="reviews" aria-label="Client reviews">
+      <div class="reviews-bg" aria-hidden="true">
+        <div class="img-ph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+          <span>Background photo placeholder<span class="ph-note"> · photoshoot asset pending</span></span>
+        </div>
+      </div>
+      <div class="reviews-overlay" aria-hidden="true"></div>
+      <div class="reviews-inner reveal">
+        <p class="reviews-count"><span id="reviewCount" data-target="100">0</span>+</p>
+        <p class="reviews-label">Five-Star Google Reviews</p>
+        <div class="stars" id="starsRow" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+
+        <!-- 7 confirmed 5-star Google reviews (supplied by Jan from DJH's Google Business
+             profile, transcribed verbatim). Arrows/dots auto-show via .multi (≥2 slides).
+             TO ADD MORE: drop another <div class="carousel-slide"> block below — §0: ONLY
+             reviews confirmed by Jan/DJH, never invent or paraphrase review text. -->
+        <div class="carousel" id="reviewCarousel">
+          <button class="carousel-btn prev" type="button" aria-label="Previous review"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>
+          <div class="carousel-viewport">
+            <div class="carousel-track" id="carouselTrack">
+              <div class="carousel-slide">
+                <div class="review-block">
+                  <p class="review-quote">&ldquo;I would highly recommend De Jager Hattingh Attorneys &amp; Notaries for all your legal needs &amp; even labour related issues.&rdquo;</p>
+                  <p class="review-attr">— Riney Groenewald, Google Review</p>
+                </div>
+              </div>
+              <div class="carousel-slide">
+                <div class="review-block">
+                  <p class="review-quote">&ldquo;Exceptional professionalism, clear communication and readily available. I highly recommend.&rdquo;</p>
+                  <p class="review-attr">— Sharon VanRooyen, Google Review</p>
+                </div>
+              </div>
+              <div class="carousel-slide">
+                <div class="review-block">
+                  <!-- Reviewer's own quotation marks kept verbatim; decorative curly quotes omitted here to avoid a doubled opening quote -->
+                  <p class="review-quote">&quot;Best and friendliest service in Middelburg, what a professional team !&quot; Top-Tier experience</p>
+                  <p class="review-attr">— Gerrit Roodzant, Google Review</p>
+                </div>
+              </div>
+              <div class="carousel-slide">
+                <div class="review-block">
+                  <p class="review-quote">&ldquo;DJH Attorneys give the most professional service. I'd definitely recommend them..&rdquo;</p>
+                  <p class="review-attr">— Daksha Parshotam, Google Review</p>
+                </div>
+              </div>
+              <div class="carousel-slide">
+                <div class="review-block">
+                  <p class="review-quote">&ldquo;The best in the industry!Swift service with friendly staff.&rdquo;</p>
+                  <p class="review-attr">— shani geldenhuys, Google Review</p>
+                </div>
+              </div>
+              <div class="carousel-slide">
+                <div class="review-block">
+                  <p class="review-quote">&ldquo;Highly recommend this winning team!&rdquo;</p>
+                  <p class="review-attr">— Dana Daniels, Google Review</p>
+                </div>
+              </div>
+              <div class="carousel-slide">
+                <div class="review-block">
+                  <p class="review-quote">&ldquo;Stands out above the rest 👌&rdquo;</p>
+                  <p class="review-attr">— Nicky Prinsloo, Google Review</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="carousel-btn next" type="button" aria-label="Next review"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>
+          <div class="carousel-dots" id="carouselDots"></div>
+        </div>
+
+        <p class="reviews-src"><a href="https://g.page/r/CdDDsHYBHRX8EBM/review" target="_blank" rel="noopener">Read our Google reviews</a></p>
+      </div>
+    </section>
+
+    <!-- ══ CONTACT (base: Direction 1) ══ -->
+    <section id="contact" aria-label="Contact us">
+      <div class="contact-inner">
+        <div class="contact-head reveal">
+          <span class="eyebrow">Get in Touch</span>
+          <h2 class="serif-heading">We'd love to <em>hear</em> from you</h2>
+          <!-- §3 Contact #1: red-struck intro line removed -->
+          <div class="contact-list">
+            <div class="c-row">
+              <span class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg></span>
+              <!-- §3 Contact #5: address is a Google Maps link -->
+              <div><p class="c-label">Visit Us</p><p class="c-value"><a href="https://www.google.com/maps/search/?api=1&amp;query=34%20Dolerite%20Crescent%2C%20Middelburg%2C%201050%2C%20South%20Africa" target="_blank" rel="noopener">34 Dolerite Crescent, No 14 Fountain Square,<br>Middelburg, 1050</a></p></div>
+            </div>
+            <div class="c-row">
+              <span class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+              <div><p class="c-label">Call Us</p><p class="c-value"><a href="tel:+27130010272">013 001 0272</a></p></div>
+            </div>
+            <div class="c-row">
+              <span class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></span>
+              <div><p class="c-label">Email Us</p><p class="c-value"><a href="mailto:info@djhattorneys.co.za">info@djhattorneys.co.za</a></p></div>
+            </div>
+            <div class="c-row">
+              <span class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></span>
+              <div><p class="c-label">WhatsApp</p><p class="c-value"><a href="https://wa.me/27692042808" target="_blank" rel="noopener">069 204 2808</a></p></div>
+            </div>
+            <div class="c-row">
+              <span class="c-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+              <div><p class="c-label">Office Hours</p><p class="c-value">Mon–Thu 08:00–16:30 · Fri 08:00–16:00</p></div>
+            </div>
+          </div>
+
+          <!-- §3 Contact #3: Instagram + LinkedIn in addition to Facebook. URLs UNCONFIRMED → placeholders (§0). -->
+          <div class="social-row" aria-label="Social media">
+            <a class="s-link" href="#" title="Facebook — URL to be confirmed" aria-label="Facebook (URL to be confirmed)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.198 21.5h4v-8.01h3.604l.396-3.98h-4V7.5a1 1 0 0 1 1-1h3v-4h-3a5 5 0 0 0-5 5v2.01h-2l-.396 3.98h2.396v8.01Z"/></svg></a>
+            <a class="s-link" href="#" title="Instagram — URL to be confirmed" aria-label="Instagram (URL to be confirmed)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+            <a class="s-link" href="#" title="LinkedIn — URL to be confirmed" aria-label="LinkedIn (URL to be confirmed)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>
+            <span class="social-tbc">Instagram, LinkedIn &amp; Facebook links — URLs to be confirmed by DJH</span>
+          </div>
+        </div>
+
+        <div class="contact-col">
+          <form class="contact-form reveal" onsubmit="return false;">
+            <div class="form-row">
+              <div class="field"><label for="cf-name">Name</label><input id="cf-name" type="text" placeholder="Your full name" autocomplete="name" /></div>
+              <div class="field"><label for="cf-phone">Phone</label><input id="cf-phone" type="tel" placeholder="Contact number" autocomplete="tel" /></div>
+            </div>
+            <div class="field"><label for="cf-email">Email</label><input id="cf-email" type="email" placeholder="you@email.com" autocomplete="email" /></div>
+            <div class="field"><label for="cf-message">How can we help?</label><textarea id="cf-message" placeholder="Tell us briefly about your matter…"></textarea></div>
+            <button type="submit" class="btn btn-primary">
+              Send Message
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/></svg>
+            </button>
+          </form>
+          <!-- §3 Contact #2: second photo (placeholder), enabled by the slightly smaller form -->
+          <div class="contact-photo reveal">
+            <div class="img-ph" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+              <span>Placeholder image<span class="ph-note"> · photoshoot asset pending</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- §3 Contact #5 companion: keyless Google Maps embed. Same query as the
+           VISIT US link so "Open in Maps" agrees. No API key, no place ID. -->
+      <div class="contact-map reveal">
+        <iframe
+          title="Map to De Jager Hattingh Attorneys, Middelburg"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=34%20Dolerite%20Crescent%2C%20Middelburg%2C%201050%2C%20South%20Africa&output=embed"></iframe>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ══ FOOTER ══ -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="./assets/DJH-logo-paper.png" alt="De Jager Hattingh Attorneys" />
+        <p class="footer-firm">De Jager Hattingh<br>Attorneys, Notaries &amp; Conveyancers</p>
+        <p>Not your average lawyers.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Explore</h5>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#team">Our Professionals</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h5>Visit &amp; Contact</h5>
+        <p><a href="https://www.google.com/maps/search/?api=1&amp;query=34%20Dolerite%20Crescent%2C%20No%2014%20Fountain%20Square%2C%20Middelburg%2C%201050" target="_blank" rel="noopener">34 Dolerite Crescent, No 14 Fountain Square, Middelburg, 1050</a></p>
+        <a href="tel:+27130010272">013 001 0272</a>
+        <!-- §3 Contact #4: WhatsApp added to Visit & Contact (confirmed 069 204 2808) -->
+        <a href="https://wa.me/27692042808" target="_blank" rel="noopener">WhatsApp · 069 204 2808</a>
+        <a href="mailto:info@djhattorneys.co.za">info@djhattorneys.co.za</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 De Jager Hattingh Attorneys. All rights reserved.</span>
+      <span>Middelburg, Mpumalanga · Est. 2022</span>
+    </div>
+  </footer>
+
+  <!-- ══ BIO MODAL (populated from the clicked team card) ══ -->
+  <div class="bio-modal" id="bioModal" role="dialog" aria-modal="true" aria-labelledby="bioModalName" hidden>
+    <div class="bio-modal-scrim" data-close></div>
+    <div class="bio-modal-card">
+      <button class="bio-modal-close" id="bioModalClose" type="button" aria-label="Close bio">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+      <div class="bio-modal-head">
+        <div class="bio-modal-avatar"><span class="initials" id="bioModalInitials" aria-hidden="true"></span></div>
+        <div>
+          <h3 id="bioModalName"></h3>
+          <p class="team-role" id="bioModalRole"></p>
+          <p class="team-qual" id="bioModalQual"></p>
+        </div>
+      </div>
+      <div class="bio-modal-body" id="bioModalBody" tabindex="0"></div>
+    </div>
+  </div>
+
+  <!-- ══ CUSTOMIZER PANEL ══ -->
+  <aside class="cz-panel" id="czPanel" aria-label="Site customizer">
+    <div class="cz-head">
+      <span class="cz-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21v-7"/><path d="M4 10V3"/><path d="M12 21v-9"/><path d="M12 8V3"/><path d="M20 21v-5"/><path d="M20 12V3"/><path d="M1 14h6"/><path d="M9 8h6"/><path d="M17 16h6"/></svg>
+        Customize
+      </span>
+      <button class="cz-collapse" id="czCollapse" type="button" aria-label="Collapse customizer" aria-expanded="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+    </div>
+    <div class="cz-body" id="czBody">
+      <div class="cz-group">
+        <p class="cz-legend" id="czHeroLbl">Hero style</p>
+        <div class="cz-seg" role="group" aria-labelledby="czHeroLbl">
+          <button class="cz-opt" type="button" data-axis="hero" data-val="light" aria-pressed="true">Light</button>
+          <button class="cz-opt" type="button" data-axis="hero" data-val="dark" aria-pressed="false">Dark</button>
+        </div>
+      </div>
+      <div class="cz-group">
+        <p class="cz-legend" id="czAccentLbl">Accent palette</p>
+        <div class="cz-seg" role="group" aria-labelledby="czAccentLbl">
+          <button class="cz-opt" type="button" data-axis="accent" data-val="peru" aria-pressed="true"><span class="cz-swatch" style="background:#C09464"></span>Peru</button>
+          <button class="cz-opt" type="button" data-axis="accent" data-val="slate" aria-pressed="false"><span class="cz-swatch" style="background:#2D636D"></span>Slate</button>
+          <button class="cz-opt" type="button" data-axis="accent" data-val="sienna" aria-pressed="false"><span class="cz-swatch" style="background:#885B42"></span>Sienna</button>
+        </div>
+      </div>
+      <div class="cz-group">
+        <p class="cz-legend" id="czFontLbl">Display font</p>
+        <div class="cz-seg" role="group" aria-labelledby="czFontLbl">
+          <button class="cz-opt" type="button" data-axis="font" data-val="dir1" aria-pressed="true">Cormorant</button>
+          <button class="cz-opt" type="button" data-axis="font" data-val="playfair" aria-pressed="false">Playfair</button>
+          <button class="cz-opt" type="button" data-axis="font" data-val="lora" aria-pressed="false">Lora</button>
+        </div>
+      </div>
+      <div class="cz-share">
+        <p class="cz-legend">Current look</p>
+        <p class="cz-state" id="czState" aria-live="polite"></p>
+        <button class="cz-copy" id="czCopy" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+          <span id="czCopyLabel">Copy this look</span>
+        </button>
+      </div>
+      <button class="cz-reset" id="czReset" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+        Reset to recommended
+      </button>
+    </div>
+  </aside>
+
+  <script>
+    (function () {
+      'use strict';
+
+      var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var body = document.body;
+      var rootEl = document.documentElement;
+      var nav = document.getElementById('nav');
+
+      var beatsWrap = document.getElementById('storyBeats');
+      var threadFill = document.getElementById('threadFill');
+      var storyImg = document.querySelector('.story-img');
+
+      /* ════ ★ TRAVELLING MONOGRAM ════ */
+      var traveller = document.getElementById('traveller');
+      var travImg = document.getElementById('travImg');
+      var anchor = document.getElementById('monogramAnchor');
+      var slot = document.getElementById('navSlot');
+
+      var anchorDocTop = 0, anchorDocLeft = 0, anchorW = 0;
+      var slotTop = 0, slotLeft = 0, slotW = 0;
+      var travelDist = 1, ticking = false;
+
+      function measure() {
+        var aRect = anchor.getBoundingClientRect();
+        anchorDocTop = aRect.top + window.scrollY;
+        anchorDocLeft = aRect.left + window.scrollX;
+        anchorW = aRect.width;
+        var sRect = slot.getBoundingClientRect();
+        slotTop = sRect.top; slotLeft = sRect.left; slotW = sRect.width;
+        traveller.style.width = anchorW + 'px';
+        travelDist = Math.max(anchorDocTop - slotTop, 1);
+      }
+      function smooth(p) { return p * p * (3 - 2 * p); }
+
+      function update() {
+        ticking = false;
+        var y = window.scrollY;
+        var vh = window.innerHeight;
+        var beatsRect = beatsWrap.getBoundingClientRect();
+        var imgRect = storyImg.getBoundingClientRect();
+
+        var p = Math.min(Math.max(y / travelDist, 0), 1);
+        var e = smooth(p);
+        var naturalTop = anchorDocTop - y;
+        var x = anchorDocLeft + (slotLeft - anchorDocLeft) * e;
+        var ty = naturalTop + (slotTop - naturalTop) * e;
+        var s = 1 + (slotW / anchorW - 1) * e;
+        traveller.style.transform = 'translate(' + x + 'px,' + ty + 'px) scale(' + s + ')';
+        nav.classList.toggle('solid', p >= 0.98);
+
+        var tp = (vh * 0.6 - beatsRect.top) / beatsRect.height;
+        threadFill.style.transform = 'scaleY(' + Math.min(Math.max(tp, 0), 1) + ')';
+
+        var drift = -((imgRect.top + imgRect.height / 2) - vh / 2) / vh * 16;
+        storyImg.style.transform = 'translateY(' + Math.max(-8, Math.min(8, drift)) + 'px)';
+      }
+      function requestUpdate() { if (!ticking) { ticking = true; window.requestAnimationFrame(update); } }
+      function boot() { measure(); update(); }
+
+      if (prefersReduced) {
+        body.classList.add('static-logo');
+        nav.classList.add('solid');
+      } else {
+        if (travImg.complete) boot(); else travImg.addEventListener('load', boot);
+        window.addEventListener('load', boot);
+        window.addEventListener('scroll', requestUpdate, { passive: true });
+        var resizeT;
+        window.addEventListener('resize', function () { clearTimeout(resizeT); resizeT = setTimeout(boot, 120); });
+        boot();
+      }
+
+      /* ════ CUSTOMIZER — three site-wide axes on <html> (no persistence) ════ */
+      /* Each themed logo carries its own ink/paper pair (monogram, subtitle). */
+      var themedLogos = document.querySelectorAll('img.logo-themed');
+      var czOpts = document.querySelectorAll('.cz-opt');
+      var fadeT;
+      var DEFAULTS = { hero: 'light', accent: 'peru', font: 'dir1' };
+      var state = { hero: 'light', accent: 'peru', font: 'dir1' };
+
+      function syncButtons() {
+        czOpts.forEach(function (b) {
+          b.setAttribute('aria-pressed', state[b.dataset.axis] === b.dataset.val ? 'true' : 'false');
+        });
+      }
+
+      function applyAxis(axis, val, animate) {
+        if (state[axis] === val) return;
+        state[axis] = val;
+        if (animate && !prefersReduced) {
+          rootEl.classList.add('theme-fade');
+          clearTimeout(fadeT);
+          fadeT = setTimeout(function () { rootEl.classList.remove('theme-fade'); }, 450);
+        }
+        rootEl.setAttribute('data-' + axis, val);
+        if (axis === 'hero') {
+          var key = (val === 'dark') ? 'paper' : 'ink';
+          themedLogos.forEach(function (img) { img.src = img.dataset[key]; });
+        }
+        syncButtons();
+        updateHash();
+        updateStateLine();
+
+        // hero (logo aspect) and font (heights) change layout → re-measure the monogram journey
+        if (!prefersReduced && (axis === 'hero' || axis === 'font')) {
+          if (travImg.complete) boot();
+          else travImg.addEventListener('load', function onSwap() { travImg.removeEventListener('load', onSwap); boot(); });
+          // fonts can reflow after they paint; nudge a re-measure shortly after
+          setTimeout(boot, 260);
+        }
+      }
+
+      czOpts.forEach(function (b) {
+        b.addEventListener('click', function () { applyAxis(b.dataset.axis, b.dataset.val, true); });
+      });
+
+      document.getElementById('czReset').addEventListener('click', function () {
+        applyAxis('hero', DEFAULTS.hero, true);
+        applyAxis('accent', DEFAULTS.accent, true);
+        applyAxis('font', DEFAULTS.font, true);
+        updateHash();        /* covers the already-at-defaults case (applyAxis no-ops) */
+        updateStateLine();
+      });
+
+      /* ════ Shareable look: URL-hash state + "Copy this look" ════
+         Hash carries the three axes (#hero=…&accent=…&font=…) via
+         history.replaceState — no history spam, no scroll jump, and a
+         fresh load with a hash renders that state on first paint.
+         localStorage stays banned (CLAUDE.md §1, amended 03 Jul 2026). */
+      var czState = document.getElementById('czState');
+      var czCopyBtn = document.getElementById('czCopy');
+      var czCopyLabel = document.getElementById('czCopyLabel');
+      var LABELS = {
+        hero:   { light: 'Light hero', dark: 'Dark hero' },
+        accent: { peru: 'Peru', slate: 'Slate', sienna: 'Sienna' },
+        font:   { dir1: 'Cormorant', playfair: 'Playfair', lora: 'Lora' }
+      };
+      var VALID = { hero: ['light', 'dark'], accent: ['peru', 'slate', 'sienna'], font: ['dir1', 'playfair', 'lora'] };
+
+      function hashFor() {
+        if (state.hero === DEFAULTS.hero && state.accent === DEFAULTS.accent && state.font === DEFAULTS.font) return '';
+        return 'hero=' + state.hero + '&accent=' + state.accent + '&font=' + state.font;
+      }
+      function shareURL() {
+        var h = hashFor();
+        return location.origin + location.pathname + location.search + (h ? '#' + h : '');
+      }
+      function updateHash() {
+        try { history.replaceState(null, '', shareURL()); } catch (err) { /* exotic embeds */ }
+      }
+      function updateStateLine() {
+        czState.textContent = LABELS.hero[state.hero] + ' · ' + LABELS.accent[state.accent] + ' · ' + LABELS.font[state.font];
+      }
+      /* Unknown keys/values fall back to defaults silently; plain anchors (#about) pass through untouched */
+      function parseHash() {
+        var h = location.hash.replace(/^#/, '');
+        if (!h || h.indexOf('=') === -1) return;
+        h.split('&').forEach(function (kv) {
+          var pair = kv.split('=');
+          if (VALID[pair[0]] && VALID[pair[0]].indexOf(pair[1]) !== -1) applyAxis(pair[0], pair[1], false);
+        });
+      }
+
+      var copyT;
+      function copyFeedback(ok) {
+        czCopyLabel.textContent = ok ? 'Copied ✓' : 'Copy failed — copy the address bar';
+        clearTimeout(copyT);
+        copyT = setTimeout(function () { czCopyLabel.textContent = 'Copy this look'; }, 2000);
+      }
+      function fallbackCopy(text) {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        var ok = false;
+        try { ok = document.execCommand('copy'); } catch (err) { ok = false; }
+        document.body.removeChild(ta);
+        copyFeedback(ok);
+      }
+      czCopyBtn.addEventListener('click', function () {
+        var url = shareURL();
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(url).then(function () { copyFeedback(true); }, function () { fallbackCopy(url); });
+        } else { fallbackCopy(url); }
+      });
+
+      parseHash();
+      updateStateLine();
+
+      // Panel collapse (starts collapsed on small screens so it doesn't bury the hero)
+      var czPanel = document.getElementById('czPanel');
+      var czCollapse = document.getElementById('czCollapse');
+      if (window.innerWidth < 700) {
+        czPanel.classList.add('collapsed');
+        czCollapse.setAttribute('aria-expanded', 'false');
+        czCollapse.setAttribute('aria-label', 'Expand customizer');
+      }
+      czCollapse.addEventListener('click', function () {
+        var collapsed = czPanel.classList.toggle('collapsed');
+        czCollapse.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+        czCollapse.setAttribute('aria-label', collapsed ? 'Expand customizer' : 'Collapse customizer');
+      });
+
+      /* ════ Hero entrance ════ */
+      if (prefersReduced) body.classList.add('hero-loaded');
+      else window.requestAnimationFrame(function () { window.requestAnimationFrame(function () { body.classList.add('hero-loaded'); }); });
+
+      /* ════ Mobile menu ════ */
+      var menu = document.getElementById('mobileMenu');
+      var mToggle = document.getElementById('navToggle');
+      var closeBtn = document.getElementById('navClose');
+      function openMenu() { menu.classList.add('open'); menu.setAttribute('aria-hidden', 'false'); mToggle.setAttribute('aria-expanded', 'true'); body.style.overflow = 'hidden'; }
+      function closeMenu() { menu.classList.remove('open'); menu.setAttribute('aria-hidden', 'true'); mToggle.setAttribute('aria-expanded', 'false'); body.style.overflow = ''; }
+      mToggle.addEventListener('click', openMenu);
+      closeBtn.addEventListener('click', closeMenu);
+      menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', closeMenu); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && menu.classList.contains('open')) closeMenu(); });
+
+      /* ════ Team bio modal — focus-trapped dialog; cards stay uniform ════ */
+      var bioModal = document.getElementById('bioModal');
+      if (bioModal) {
+        var bmClose = document.getElementById('bioModalClose');
+        var bmInitials = document.getElementById('bioModalInitials');
+        var bmName = document.getElementById('bioModalName');
+        var bmRole = document.getElementById('bioModalRole');
+        var bmQual = document.getElementById('bioModalQual');
+        var bmBody = document.getElementById('bioModalBody');
+        var bioReturnFocus = null;
+
+        var openBio = function (card, trigger) {
+          bmInitials.textContent = card.querySelector('.initials').textContent;
+          bmName.textContent = card.querySelector('.team-name').textContent;
+          bmRole.textContent = card.querySelector('.team-role').textContent;
+          var q = card.querySelector('.team-qual');
+          bmQual.textContent = q.textContent;
+          bmQual.className = q.className; /* carries the .placeholder flag (CONFIRM: …) */
+          bmQual.title = q.title || '';
+          bmBody.innerHTML = card.querySelector('.team-bio-full').innerHTML;
+          bmBody.scrollTop = 0;
+          bioReturnFocus = trigger;
+          bioModal.hidden = false;
+          body.style.overflow = 'hidden';
+          window.requestAnimationFrame(function () {
+            window.requestAnimationFrame(function () { bioModal.classList.add('open'); });
+          });
+          bmClose.focus();
+        };
+        var closeBio = function () {
+          if (bioModal.hidden) return;
+          bioModal.classList.remove('open');
+          var done = function () {
+            bioModal.hidden = true;
+            body.style.overflow = '';
+            if (bioReturnFocus) { bioReturnFocus.focus(); bioReturnFocus = null; }
+          };
+          if (prefersReduced) done(); else setTimeout(done, 260);
+        };
+
+        document.querySelectorAll('#team .team-card').forEach(function (card) {
+          var btn = card.querySelector('.team-bio-btn');
+          if (!btn) return;
+          btn.addEventListener('click', function (e) { e.stopPropagation(); openBio(card, btn); });
+          card.addEventListener('click', function (e) {
+            if (e.target.closest('.team-bio-btn')) return;
+            openBio(card, btn);
+          });
+        });
+        bmClose.addEventListener('click', closeBio);
+        bioModal.querySelector('[data-close]').addEventListener('click', closeBio);
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape' && !bioModal.hidden) closeBio();
+        });
+        /* Focus trap: Tab cycles within the dialog while open */
+        bioModal.addEventListener('keydown', function (e) {
+          if (e.key !== 'Tab') return;
+          var f = bioModal.querySelectorAll('button, [tabindex="0"], a[href]');
+          var first = f[0], last = f[f.length - 1];
+          if (e.shiftKey && document.activeElement === first) { last.focus(); e.preventDefault(); }
+          else if (!e.shiftKey && document.activeElement === last) { first.focus(); e.preventDefault(); }
+        });
+      }
+
+      /* ════ Flashlight glow — ONE pointermove listener per grid, CSS vars only.
+         Attached to the Services cards and the Team avatar tiles. ════ */
+      var attachGlow = function (grid, targets) {
+        if (!grid || !targets.length || prefersReduced) return;
+        var evt = null, tick = false;
+        grid.addEventListener('pointermove', function (e) {
+          evt = e;
+          if (tick) return;
+          tick = true;
+          window.requestAnimationFrame(function () {
+            tick = false;
+            targets.forEach(function (el) {
+              var r = el.getBoundingClientRect();
+              el.style.setProperty('--mx', (evt.clientX - r.left).toFixed(1) + 'px');
+              el.style.setProperty('--my', (evt.clientY - r.top).toFixed(1) + 'px');
+            });
+          });
+        }, { passive: true });
+      };
+      var svcGrid = document.querySelector('#services .services-grid');
+      if (svcGrid) attachGlow(svcGrid, Array.prototype.slice.call(svcGrid.querySelectorAll('.service-card')));
+      var teamGrid = document.querySelector('#team .team-grid');
+      if (teamGrid) attachGlow(teamGrid, Array.prototype.slice.call(teamGrid.querySelectorAll('.team-avatar')));
+
+      /* ════ Reviews carousel — reveals controls only when ≥2 real slides ════ */
+      var carousel = document.getElementById('reviewCarousel');
+      var track = document.getElementById('carouselTrack');
+      var dotsWrap = document.getElementById('carouselDots');
+      var slides = track ? track.children : [];
+      var idx = 0;
+      function goTo(i) {
+        var n = slides.length; if (!n) return;
+        idx = (i + n) % n;
+        track.style.transform = 'translateX(' + (-idx * 100) + '%)';
+        Array.prototype.forEach.call(dotsWrap.children, function (d, di) { d.classList.toggle('active', di === idx); });
+      }
+      if (slides.length > 1) {
+        carousel.classList.add('multi');
+        Array.prototype.forEach.call(slides, function (_, i) {
+          var d = document.createElement('button');
+          d.type = 'button'; d.setAttribute('aria-label', 'Go to review ' + (i + 1));
+          if (i === 0) d.classList.add('active');
+          d.addEventListener('click', function () { goTo(i); });
+          dotsWrap.appendChild(d);
+        });
+        carousel.querySelector('.prev').addEventListener('click', function () { goTo(idx - 1); });
+        carousel.querySelector('.next').addEventListener('click', function () { goTo(idx + 1); });
+      }
+
+      /* ════ Count-up ════ */
+      function countUp(el) {
+        var target = parseInt(el.getAttribute('data-target'), 10);
+        if (prefersReduced) { el.textContent = target; return; }
+        var duration = 1600, start = null;
+        function step(ts) {
+          if (!start) start = ts;
+          var p = Math.min((ts - start) / duration, 1);
+          var eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.floor(eased * target);
+          if (p < 1) window.requestAnimationFrame(step); else el.textContent = target;
+        }
+        window.requestAnimationFrame(step);
+      }
+
+      /* ════ IntersectionObserver: reveals, beats, reviews ════ */
+      var reveals = document.querySelectorAll('.reveal, .reveal-stagger');
+      var beats = document.querySelectorAll('.beat');
+      var reviewsSection = document.getElementById('reviews');
+      var reviewCount = document.getElementById('reviewCount');
+      var starsRow = document.getElementById('starsRow');
+      var reviewsFired = false;
+      function fireReviews() { if (reviewsFired) return; reviewsFired = true; countUp(reviewCount); starsRow.classList.add('lit'); }
+
+      if (prefersReduced || !('IntersectionObserver' in window)) {
+        reveals.forEach(function (el) { el.classList.add('visible'); });
+        beats.forEach(function (el) { el.classList.add('visible'); });
+        threadFill.style.transform = 'scaleY(1)';
+        fireReviews();
+      } else {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            var el = entry.target;
+            if (el.classList.contains('reveal-stagger')) {
+              Array.prototype.forEach.call(el.children, function (child, i) { child.style.transitionDelay = (i * 60) + 'ms'; });
+            }
+            el.classList.add('visible');
+            io.unobserve(el);
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+        reveals.forEach(function (el) { io.observe(el); });
+
+        var beatIO = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) { if (!entry.isIntersecting) return; entry.target.classList.add('visible'); beatIO.unobserve(entry.target); });
+        }, { threshold: 0.45, rootMargin: '0px 0px -10% 0px' });
+        beats.forEach(function (el) { beatIO.observe(el); });
+
+        var revIO = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) { if (!entry.isIntersecting) return; fireReviews(); revIO.unobserve(entry.target); });
+        }, { threshold: 0.35 });
+        revIO.observe(reviewsSection);
+      }
+    })();
+  </script>
+
+</body>
+</html>

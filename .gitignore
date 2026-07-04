@@ -1,0 +1,15 @@
+# Internal governing spec — not for the build repo
+assets/CLAUDE.md
+
+# Source Direction files — not used by the customizer build
+direction-1-light-modern.html
+direction-2-bold-confident.html
+direction-3-warm-approachable.html
+direction-4-jpdigital-showpiece.html
+
+# Original / unused assets — customizer.html uses the generated transparent derivatives
+assets/DJH Logo.png
+assets/DJH-logo-ink.png
+assets/cropped-DJH-Logo-White.png
+assets/Gh - Copy.svg
+assets/Option 7.pdf
