@@ -531,7 +531,9 @@
        ════════════════════════════════════════════════════════════════ */
     #contact { background: var(--bg); padding: clamp(5rem, 10vw, 8rem) clamp(1.25rem, 5vw, 4rem); }
     .contact-inner { max-width: var(--maxw); margin: 0 auto; display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(2.5rem, 6vw, 5rem); align-items: start; }
-    .contact-head p { color: var(--text-muted); margin-bottom: 2rem; max-width: 40ch; }
+    /* Direct-child only — must NOT leak margin/colour onto the nested .c-label/.c-value
+       paragraphs in the info rows (that was inflating row spacing and breaking chip alignment) */
+    .contact-head > p { color: var(--text-muted); margin-bottom: 2rem; max-width: 40ch; }
     /* Dir-1 heading: "hear" in italic accent; sized to hold one line at desktop, balanced wrap below */
     #contact .serif-heading { font-size: clamp(1.9rem, 3.4vw, 2.5rem); text-wrap: balance; }
     #contact .serif-heading em { font-style: italic; color: var(--accent-text); }
