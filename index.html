@@ -301,6 +301,8 @@
     .story-img::after { content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none; background: linear-gradient(135deg, rgba(20,23,26,0.30), var(--accent-soft)); mix-blend-mode: multiply; }
 
     .story-beats { position: relative; padding-left: 1.9rem; }
+    .thread { position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: var(--border); }
+    .thread-fill { position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: linear-gradient(180deg, var(--accent) 0%, var(--accent) 70%, var(--accent-soft) 100%); transform-origin: top; transform: scaleY(0); }
     /* §3: tighter vertical rhythm — same five facts, roughly half the height,
        so the stat column reads as a compact block rather than a long scroll */
     .beat { position: relative; padding: 0.7rem 0; }
@@ -641,6 +643,7 @@
       *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
       .reveal, .reveal-stagger > *, .h-in, .beat-body { opacity: 1 !important; transform: none !important; }
       .stars svg { opacity: 1 !important; transform: none !important; }
+      .thread-fill { transform: none !important; }
       .hero-scroll-hint svg { animation: none !important; }
     }
   </style>
@@ -728,6 +731,7 @@
         </div>
 
         <div class="story-beats" id="storyBeats">
+          <div class="thread" aria-hidden="true"><span class="thread-fill" id="threadFill"></span></div>
           <!-- §3 About #3: sub-wording beneath each point removed (kept num + label only) -->
           <div class="beat">
             <div class="beat-body"><p class="beat-num">20<em>22</em></p><p class="beat-label">Founded</p></div>
@@ -1155,6 +1159,8 @@
       var nav = document.getElementById('nav');
 
       var storyImg = document.querySelector('.story-img');
+      var beatsWrap = document.getElementById('storyBeats');
+      var threadFill = document.getElementById('threadFill');
       var heroEl = document.getElementById('hero');
       var ticking = false;
 
@@ -1218,6 +1224,7 @@
         // ── reads ──
         var vh = window.innerHeight;
         var imgRect = storyImg.getBoundingClientRect();
+        var beatsRect = beatsWrap.getBoundingClientRect();
 
         // ── writes ──
         if (prefersReduced) {
@@ -1236,6 +1243,10 @@
 
         var drift = -((imgRect.top + imgRect.height / 2) - vh / 2) / vh * 16;
         storyImg.style.transform = 'translateY(' + Math.max(-8, Math.min(8, drift)) + 'px)';
+
+        // champagne thread fills as the story beats scroll past ~60% of the viewport
+        var tp = (vh * 0.6 - beatsRect.top) / beatsRect.height;
+        threadFill.style.transform = 'scaleY(' + Math.min(Math.max(tp, 0), 1) + ')';
       }
       function requestUpdate() { if (!ticking) { ticking = true; window.requestAnimationFrame(update); } }
       function boot() { if (!prefersReduced) measure(); update(); }
@@ -1465,6 +1476,7 @@
       if (prefersReduced || !('IntersectionObserver' in window)) {
         reveals.forEach(function (el) { el.classList.add('visible'); });
         beats.forEach(function (el) { el.classList.add('visible'); });
+        threadFill.style.transform = 'scaleY(1)';
         fireReviews();
       } else {
         var io = new IntersectionObserver(function (entries) {
