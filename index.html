@@ -276,7 +276,7 @@
       display: flex; flex-direction: column; align-items: center; text-align: center;
       position: relative;
     }
-    .hero-sub { font-size: 1.02rem; font-weight: 300; color: var(--text-muted); max-width: 560px; margin: 0 auto 2.6rem; line-height: 1.8; }
+    .hero-sub { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: clamp(1.7rem, 3vw, 2.3rem); letter-spacing: -0.015em; color: var(--text); max-width: 620px; margin: 0 auto 2.6rem; line-height: 1.25; }
     .hero-cta { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
     .hero-scroll-hint {
       margin-top: 3rem;
@@ -318,11 +318,11 @@
     /* ════════════════════════════════════════════════════════════════
        SERVICES — Dir-2 bordered grid, hover-invert (base: Direction 2)
        ════════════════════════════════════════════════════════════════ */
-    #services { background: var(--bg-alt); padding: clamp(5rem, 10vw, 8rem) clamp(1.25rem, 5vw, 4rem); }
+    #services { background: var(--bg); padding: clamp(5rem, 10vw, 8rem) clamp(1.25rem, 5vw, 4rem); }
     .services-inner { max-width: var(--maxw); margin: 0 auto; }
     .services-head { max-width: 640px; margin-bottom: 3rem; }
     .services-head p { color: var(--text-muted); font-size: 1.02rem; }
-    .services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
       border-top: 1px solid var(--border); border-left: 1px solid var(--border); }
     .service-card { padding: 2.1rem 1.85rem; position: relative;
       border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
@@ -449,7 +449,7 @@
     /* Deliberately NOT capped at --maxw — spans the full width the band's own
        side padding leaves, so 8 cards read as a proper 4×2 grid filling the
        screen rather than a small cluster in the centre column. */
-    .bts-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(2.5rem, 4vw, 4rem) clamp(1.5rem, 3vw, 3rem); }
+    .bts-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(1.75rem, 2.5vw, 2.5rem) clamp(1rem, 1.6vw, 1.5rem); }
     .bts-card { display: flex; flex-direction: column; align-items: center; text-align: center; }
     .bts-photo { display: block; width: 100%; max-width: 220px; aspect-ratio: 1 / 1; margin: 0 auto 1.1rem; border: 1px solid var(--border-strong); background: var(--surface); transition: transform 0.3s var(--ease); }
     .bts-card:hover .bts-photo { transform: translateY(-3px); }
@@ -703,7 +703,7 @@
       <img src="./assets/DJH-monogram-ink.png" alt="De Jager Hattingh Attorneys monogram" class="anchor-twin" />
       <img src="./assets/DJH-subtitle-ink.png" alt="Attorneys, Notaries &amp; Conveyancers" class="hero-subtitle" />
     </div>
-    <p class="hero-sub reveal">A 100% female-owned boutique law firm in Middelburg, Mpumalanga, providing practical, tailored legal advice rather than one-size-fits-all solutions.</p>
+    <p class="hero-sub reveal">Everyone has the law. Not everyone has the judgment.</p>
     <div class="hero-cta reveal">
       <a href="#contact" class="btn btn-primary">
         Get in Touch
@@ -727,7 +727,7 @@
           <!-- §3 About #1: heading = Dir-2 "Precision. Purpose. Personal.", all three words in --text (black on light) -->
           <h2 class="serif-heading">Precision. Purpose. Personal.</h2>
           <!-- §3 About #2: intro replaced verbatim -->
-          <p class="story-lede">What began as an overnight decision in 2022 has grown into a successful and steadily expanding boutique law firm. Led by director Mignon de Jager Hattingh, a seasoned attorney specialising in commercial law and contracts, the firm is built on hard work, dedication, and a commitment to achieving the best possible outcomes for its clients. The DJH team provides practical, tailored legal advice, recognising that every client and every matter is unique.</p>
+          <p class="story-lede">Since its establishment in 2022, DJH Attorneys has grown into a successful and steadily expanding boutique law firm. Founded by Mignon de Jager Hattingh, a seasoned attorney specialising in commercial law and contracts, the firm is grounded in hard work, dedication, and a commitment to achieving the best possible outcomes for its clients. The DJH team offers practical, tailored legal advice with a personal approach, recognising that every client and every matter is unique.</p>
         </div>
 
         <div class="story-beats" id="storyBeats">
@@ -741,7 +741,7 @@
             <div class="beat-body"><p class="beat-num">100<em>%</em></p><p class="beat-label">Female-Owned</p></div>
           </div>
           <div class="beat">
-            <div class="beat-body"><p class="beat-num">Multi<em>lingual</em></p><p class="beat-label">One Team, Many Languages</p></div>
+            <div class="beat-body"><p class="beat-num">Multi<em>lingual</em></p><p class="beat-label">One Diverse Team</p></div>
           </div>
           <div class="beat">
             <div class="beat-body"><p class="beat-num">100<em>+</em></p><p class="beat-label">Five-Star Google Reviews</p></div>
@@ -773,66 +773,66 @@
             <div class="s-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg></div>
             <h4>Civil Litigation</h4>
             <!-- §3 Services #1: red-struck tail removed -->
-            <p>Dispute resolution and confident court representation.</p>
+            <p>We represent clients in disputes before the Magistrates' Courts and the High Court, from initial demand through to trial and, where necessary, appeal. Every matter is assessed on prospects and cost before we proceed, so you know what you are taking on. Where settlement serves you better than judgment, we say so.</p>
           </div>
           <div class="service-card">
             <div class="s-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
             <h4>Family Law</h4>
-            <p>Divorce, maintenance, custody and domestic matters handled with sensitivity.</p>
+            <p>We attend to divorce, whether uncontested or opposed, and to all matters flowing from it, including care and contact, maintenance, and the division of the joint estate or accrual. We also draft antenuptial contracts and parenting plans, and appear in protection order proceedings. The approach is measured, with the interests of any minor children kept central.</p>
           </div>
           <div class="service-card">
             <div class="s-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg></div>
             <h4>Contracts</h4>
-            <p>Drafting, reviewing and advising on commercial and personal agreements.</p>
+            <p>We draft, review and negotiate agreements across the commercial spectrum, including sale, lease, service, shareholder, loan and suretyship agreements. Our concern is that the document does what you intend it to do and holds up when the relationship comes under strain. We also advise on breach, cancellation and the enforcement of existing agreements.</p>
           </div>
           <div class="service-card">
             <div class="s-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
             <h4>Commercial Law</h4>
             <!-- §3 Services #7 -->
-            <p>Legal advice on commercial transactions, contracts, and business matters.</p>
+            <p>We advise businesses on company formation and structuring, shareholder and director duties, corporate governance, business acquisitions and disposals, and compliance under the Companies Act and Consumer Protection Act. Whether you are establishing an entity or restructuring an existing one, we provide advice that accounts for the commercial reality as much as the legal position.</p>
           </div>
           <div class="service-card">
             <div class="s-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" x2="21" y1="22" y2="22"/><line x1="6" x2="6" y1="18" y2="11"/><line x1="10" x2="10" y1="18" y2="11"/><line x1="14" x2="14" y1="18" y2="11"/><line x1="18" x2="18" y1="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg></div>
             <h4>Insolvency Law</h4>
             <!-- §3 Services #8 (ruling #4: item-8 desc belongs to the Insolvency card, NOT Commercial) -->
-            <p>Strategic legal guidance with insolvency, business rescue, and liquidation matters.</p>
+            <p>We act in voluntary and compulsory sequestration and liquidation, business rescue proceedings, and the proving of claims against insolvent estates. We advise creditors on recovery prospects and act for debtors seeking an orderly resolution. Early advice materially improves outcomes in this field.</p>
           </div>
           <div class="service-card">
             <div class="s-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></svg></div>
             <h4>Mediation &amp; Arbitration</h4>
-            <p>Cost-effective alternative dispute resolution, settled outside the courts.</p>
+            <p>We represent clients in mediation and arbitration proceedings and draft the dispute resolution clauses that govern them. These processes are frequently faster and more cost effective than litigation, and they keep commercial disputes out of the public record. We advise candidly on which forum best suits your matter.</p>
           </div>
           <div class="service-card">
             <div class="s-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 22h14"/><path d="M19.27 13.73A2.5 2.5 0 0 0 17.5 13h-11A2.5 2.5 0 0 0 4 15.5V17a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-1.5c0-.66-.26-1.3-.73-1.77Z"/><path d="M14 13V8.5C14 7 15 7 15 5a3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 2 1 2 1 3.5V13"/></svg></div>
             <h4>Notarial Services</h4>
-            <p>Authentication, antenuptial contracts and notarial deeds, in-house.</p>
+            <p>We attend to antenuptial contracts, notarial bonds, servitudes, long term leases, cessions, powers of attorney, and the authentication of documents for use abroad, including apostille certification. Notarial work carries strict formal requirements and is executed with the precision those requirements demand.</p>
           </div>
           <div class="service-card">
             <div class="s-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 17V5a2 2 0 0 0-2-2H4"/><path d="M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3"/></svg></div>
             <h4>Deceased Estates</h4>
-            <p>Administration and winding-up of estates, with care and efficiency.</p>
+            <p>We administer deceased estates from reporting to the Master of the High Court through to the final liquidation and distribution account. We attend to the appointment of executors, the collection and realisation of assets, creditor claims, and the transfer of immovable property to heirs. We keep families informed at every stage of what is often a lengthy process.</p>
           </div>
           <div class="service-card">
             <div class="s-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 12h-5"/><path d="M15 8h-5"/><path d="M19 17V5a2 2 0 0 0-2-2H4"/><path d="M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3"/></svg></div>
             <h4>Wills</h4>
-            <p>Drafting and safekeeping of wills that protect your wishes and your family.</p>
+            <p>We draft wills that give clear effect to your intentions and comply with the formalities of the Wills Act, so that your estate is not delayed or contested on technical grounds. We advise on testamentary trusts, the nomination of executors and guardians, and the practical consequences of your bequests. Existing wills should be reviewed whenever your circumstances change.</p>
           </div>
           <div class="service-card">
             <div class="s-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
             <h4>Conveyancing</h4>
-            <p>Property transfers, bonds and registration by registered conveyancers.</p>
+            <p>We attend to the transfer of residential, commercial, agricultural and sectional title property. We also handle subdivisions, consolidations and the registration of servitudes. Transfers are driven actively so that your registration is not delayed unnecessarily.</p>
           </div>
           <div class="service-card">
             <div class="s-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/></svg></div>
             <h4>Correspondent Work</h4>
             <!-- §3 Services #6 -->
-            <p>Acting as correspondent attorneys for firms nationwide, our dedicated messenger and two company vehicles enable us to provide swift, efficient assistance, particularly in urgent applications.</p>
+            <p>We act as correspondents for firms outside our jurisdiction in all matters served or heard in the courts of our area, including the issuing and service of process and appearances. We also provide strategic guidance on the local court's Practice Directives. We strive to assist all our instructing attorneys with regular feedback and reliable attendance to deadlines.</p>
           </div>
           <!-- §3 Services #3: 12th service — Debt Collection -->
           <div class="service-card">
             <div class="s-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="m16.71 13.88.7.71-2.82 2.82"/></svg></div>
             <h4>Debt Collection</h4>
-            <p>Efficient recovery of outstanding debts through professional, legally compliant processes.</p>
+            <p>We recover outstanding debts on behalf of businesses and individuals, from letters of demand through to summons, judgment and execution. We advise on the commercial merits of pursuing a debt before costs are incurred, and where a debtor has no attachable assets, we tell you so. Collections are handled in compliance with the National Credit Act and the Debt Collectors Act.</p>
           </div>
         </div>
       </div>
@@ -855,7 +855,7 @@
             <p class="team-qual">LLB, NWU</p>
             <!-- §5.3: confirmed attorney email -->
             <p class="team-email"><a href="mailto:mignon@djhattorneys.co.za">mignon@djhattorneys.co.za</a></p>
-            <div class="team-bio-full" hidden><p>Mignon founded the firm in 2022 with a passion for providing practical, detail-oriented legal services. She obtained her Bachelor of Laws degree from the North-West University in 2017. After completing her articles, she was admitted as an attorney and later went on to qualify as a notary. Her commitment to excellence was recognised when she achieved the highest mark in the province in the Notarial Practice examination. Mignon specialises in commercial law and has experience in a wide range of commercial matters, particularly in the mining industry. She is highly experienced in drafting, reviewing and negotiating contracts, providing clients with practical legal solutions. She believes in building long-term relationships with clients and is committed to providing each client with personal attention and practical legal solutions.</p></div>
+            <div class="team-bio-full" hidden><p>Mignon founded the firm in 2022 with a passion for providing practical, detail-oriented legal services. She obtained her Bachelor of Laws degree from the North-West University in 2017. After completing her articles, she was admitted as an attorney and later went on to qualify as a notary. Mignon specialises in commercial law and has experience in a wide range of commercial matters, particularly in the mining industry. She is highly experienced in drafting, reviewing and negotiating contracts, providing clients with practical legal solutions. She believes in building long-term relationships with clients and is committed to providing each client with personal attention and practical legal solutions.</p></div>
             <button class="team-bio-btn" type="button"><span class="chev" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>Read bio</button>
           </div>
           <div class="team-card">
@@ -877,7 +877,7 @@
             <p class="team-qual">LLM, UFS</p>
             <!-- §5.3: confirmed attorney email -->
             <p class="team-email"><a href="mailto:boitumelo@djhattorneys.co.za">boitumelo@djhattorneys.co.za</a></p>
-            <div class="team-bio-full" hidden><p>Boitumelo's journey with the firm began in 2024 when she joined the team as a candidate attorney. Through dedication, hard work, and valuable mentorship under Mignon's guidance, she steadily developed her skills and progressed to her current position as a junior associate. She obtained her Bachelor of Laws degree from the University of the Free State in 2022 and went on to complete her Master of Laws in corporate law through the University of the Free State in February 2026. Boitumelo has a keen interest in continuous professional development and aspires to qualify as a notary in the future. She possesses excellent research, drafting and analytical skills, enabling her to provide practical, well-considered legal solutions.</p></div>
+            <div class="team-bio-full" hidden><p>Boitumelo's journey with the firm began in 2024 when she joined the team as a candidate attorney. Through dedication and hard work, she steadily developed her skills and progressed to her current position as a junior associate. She obtained her Bachelor of Laws degree from the University of the Free State in 2022 and went on to complete her Master of Laws in corporate law through the University of the Free State in February 2026. Boitumelo has a keen interest in continuous professional development and aspires to qualify as a notary in the future. She possesses excellent research, drafting and analytical skills, enabling her to provide practical, well-considered legal solutions.</p></div>
             <button class="team-bio-btn" type="button"><span class="chev" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>Read bio</button>
           </div>
           <div class="team-card">
