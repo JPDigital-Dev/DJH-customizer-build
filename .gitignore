@@ -13,3 +13,12 @@ assets/DJH-logo-ink.png
 assets/cropped-DJH-Logo-White.png
 assets/Gh - Copy.svg
 assets/Option 7.pdf
+
+# Client reference material — not a site asset
+WEBSITE LAYOUT.pdf
+
+# Raw/working photo source files — not referenced by the site, kept locally
+# only so specific people's photos can be re-cropped without a re-upload
+assets/photos/_MG_*.jpg
+assets/photos/GroupHeaderPortrait.jpg
+assets/photos/ChatGPT Image*.png

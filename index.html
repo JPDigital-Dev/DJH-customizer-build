@@ -1,46 +1,49 @@
 <!DOCTYPE html>
-<html lang="en" data-hero="light" data-accent="peru" data-font="dir1">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DJH Attorneys — Customizer | De Jager Hattingh, Attorneys, Notaries &amp; Conveyancers</title>
-  <meta name="description" content="Interactive design preview for De Jager Hattingh Attorneys, Notaries &amp; Conveyancers (Middelburg, Mpumalanga). Unlisted client demo — compare hero, palette and font options live. Not the firm's live website." />
-  <meta name="robots" content="noindex, nofollow" />
+  <title>De Jager Hattingh Attorneys, Notaries &amp; Conveyancers | Middelburg</title>
+  <meta name="description" content="De Jager Hattingh Attorneys, Notaries &amp; Conveyancers — a 100% female-owned boutique law firm in Middelburg, Mpumalanga, providing practical, tailored legal advice." />
+  <meta name="robots" content="noindex, nofollow" /><!-- flip to index,follow when this build is ready to go live — left as-is pending Jan's go-ahead -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,800;1,400;1,500&family=Source+Sans+3:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Nunito+Sans:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     /* ════════════════════════════════════════════════════════════════
-       DJH ATTORNEYS — THE CUSTOMIZER
-       One master file. Four Directions merged into one theme-able site.
-       Three SITE-WIDE toggle axes, each a data-* attribute on <html>:
-         data-hero   : light (default) | dark
-         data-accent : peru (default)  | slate | sienna
-         data-font   : dir1 (default)  | playfair | lora
-       Every themeable value runs through the role tokens below, so one
-       flip re-themes every section together. Default (un-toggled) state =
-       the Direction bases WITH every WEBSITE_LAYOUT.pdf revision applied.
-       No localStorage — reset-on-reload; a Reset control restores defaults.
+       DJH ATTORNEYS — production site
+       Built from the customizer demo. DJH chose Light hero / Peru accent /
+       Cormorant font, so the site is now locked to that single look — the
+       three-axis toggle system (and its cz-panel UI) has been retired.
        ════════════════════════════════════════════════════════════════ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      /* ── Brand constants (never change with any toggle) ── */
+      /* ── Brand constants ── */
       --ink:        #14171A;
       --paper:      #F6F3EE;
       --paper-60:   rgba(246,243,238,0.6);
       --paper-30:   rgba(246,243,238,0.3);
       --accent-2:   #2D636D;          /* slate-teal structural secondary (reviews tint) */
-      /* Firm-name font is locked to the logo face (Cormorant), independent of the font axis */
+      /* Firm-name font is locked to the logo face */
       --firm-serif: 'Cormorant Garamond', Georgia, serif;
+
+      /* §6: contact form is a fixed light card (ported from the Direction-1
+         source: white card, tan-soft fields, sienna labels) */
+      --form-surface:     #FFFFFF;
+      --form-field:       #EFE7DB;
+      --form-text:        #14171A;
+      --form-label:       #8C6A3C;
+      --form-placeholder: rgba(20,23,26,0.4);
 
       --maxw: 1120px;
       --nav-h: 72px;
       --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 
-      /* ── ROLE TOKENS — LIGHT HERO (default) ── */
+      /* ── ROLE TOKENS ── */
       --bg:            #F6F3EE;
       --bg-alt:        #EFE7DB;        /* warm cream — Services reads like Dir-1 */
+      --support-bg:    var(--bg-alt);  /* §5.4: Support staff band — now matches Services/Practice Areas exactly */
       --surface:       #FBF9F5;
       --text:          #14171A;
       --text-muted:    #5A5550;
@@ -50,81 +53,24 @@
       --nav-bg:        rgba(246,243,238,0.92);
       --ph-bg:         #E7DED0;
       --shadow-card:   rgba(20,23,26,0.22);
-      --hero-glow-1:   rgba(45,99,109,0.10);
-      --hero-glow-2:   rgba(192,148,100,0.14);
 
-      /* Services flashlight glow — light hero: inherently subtler on the pale
-         surface; ring carries more of the effect, wash stays whisper-quiet */
+      /* Services/Team flashlight glow */
       --glow-size:       260px;
       --glow-ring:       0.55;
       --glow-ring-hover: 1;
       --glow-wash:       0.09;
-    }
 
-    /* ── ROLE TOKENS — DARK HERO ── */
-    html[data-hero="dark"] {
-      --bg:            #14171A;
-      --bg-alt:        #191D21;
-      --surface:       #1E2328;
-      --text:          #F6F3EE;
-      --text-muted:    rgba(246,243,238,0.64);
-      --text-soft:     rgba(246,243,238,0.40);
-      --border:        rgba(246,243,238,0.12);
-      --border-strong: rgba(246,243,238,0.30);
-      --nav-bg:        rgba(20,23,26,0.90);
-      --ph-bg:         #1B1F23;
-      --shadow-card:   rgba(0,0,0,0.60);
-      --hero-glow-1:   rgba(45,99,109,0.22);
-      --hero-glow-2:   rgba(192,148,100,0.10);
-
-      /* Services flashlight glow — dark hero: the Stripe look; brighter wash,
-         slightly dimmer baseline so the raking light has range */
-      --glow-size:       260px;
-      --glow-ring:       0.35;
-      --glow-ring-hover: 0.95;
-      --glow-wash:       0.16;
-    }
-
-    /* ── ACCENT AXIS — hue + both-ground legible text variants (Option 7 palette §4) ── */
-    :root, html[data-accent="peru"] {
+      /* ── ACCENT (Peru/Gold — Option 7 palette §4) ── */
       --accent:            #C09464;                 /* gold graphic */
       --accent-soft:       rgba(192,148,100,0.28);
       --btn-bg:            #C09464;
       --btn-text:          #14171A;                 /* ink on gold */
-      --accent-text-light: #8C6A3C;                 /* bronze — AA on paper */
-      --accent-text-dark:  #C09464;
-    }
-    html[data-accent="slate"] {
-      --accent:            #2D636D;
-      --accent-soft:       rgba(45,99,109,0.30);
-      --btn-bg:            #2D636D;
-      --btn-text:          #F6F3EE;                 /* paper on slate */
-      --accent-text-light: #285A63;
-      --accent-text-dark:  #7FB0BA;
-    }
-    html[data-accent="sienna"] {
-      --accent:            #885B42;
-      --accent-soft:       rgba(136,91,66,0.30);
-      --btn-bg:            #885B42;
-      --btn-text:          #F6F3EE;                 /* paper on sienna */
-      --accent-text-light: #7A4F38;
-      --accent-text-dark:  #C39A80;
-    }
-    /* Resolve the text-accent for the active ground */
-    :root, html[data-hero="light"] { --accent-text: var(--accent-text-light); }
-    html[data-hero="dark"]         { --accent-text: var(--accent-text-dark); }
+      --accent-text:       #8C6A3C;                 /* bronze — AA on paper */
+      --accent-text-dark:  #C09464;                 /* for use over dark/photo grounds (hero) */
 
-    /* ── FONT AXIS ── */
-    :root, html[data-font="dir1"]     { --serif: 'Cormorant Garamond', Georgia, serif; --sans: 'DM Sans', -apple-system, 'Segoe UI', sans-serif; }
-    html[data-font="playfair"]        { --serif: 'Playfair Display', Georgia, serif;   --sans: 'Source Sans 3', -apple-system, 'Segoe UI', sans-serif; }
-    html[data-font="lora"]            { --serif: 'Lora', Georgia, serif;                --sans: 'Nunito Sans', -apple-system, 'Segoe UI', sans-serif; }
-
-    /* Theme-switch fade — applied briefly by JS so it never clobbers component transitions */
-    html.theme-fade, html.theme-fade *, html.theme-fade *::before, html.theme-fade *::after {
-      transition: background-color 0.4s var(--ease), color 0.4s var(--ease),
-                  border-color 0.4s var(--ease), fill 0.4s var(--ease),
-                  stroke 0.4s var(--ease), box-shadow 0.4s var(--ease) !important;
-      transition-delay: 0s !important;
+      /* ── DISPLAY FONT (Cormorant) ── */
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans:  'DM Sans', -apple-system, 'Segoe UI', sans-serif;
     }
 
     html { scroll-behavior: smooth; }
@@ -179,7 +125,8 @@
     .btn-ghost:hover { border-color: var(--accent); color: var(--accent-text); }
 
     /* ════════════════════════════════════════════════════════════════
-       NAV — receives the travelling monogram
+       NAV — hidden entirely over the hero (which carries no nav chrome of
+       its own); fades in once scrolled to #intro and beyond.
        ════════════════════════════════════════════════════════════════ */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -187,15 +134,19 @@
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 clamp(1.25rem, 5vw, 4rem);
       background: transparent; border-bottom: 1px solid transparent;
-      transition: background 0.4s var(--ease), border-color 0.4s var(--ease);
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.4s var(--ease), background 0.4s var(--ease), border-color 0.4s var(--ease);
     }
     nav.solid {
+      opacity: 1; pointer-events: auto;
       background: var(--nav-bg);
       backdrop-filter: saturate(160%) blur(12px);
       -webkit-backdrop-filter: saturate(160%) blur(12px);
       border-bottom-color: var(--accent-soft);
     }
     .nav-logo-slot { display: block; height: 56px; }
+    /* The landing slot: an invisible img reserves the exact landing rect —
+       the visible copy is #traveller, which parks here once its journey ends. */
     .nav-logo-slot img { height: 56px; width: auto; display: block; visibility: hidden; }
     body.static-logo .nav-logo-slot img { visibility: visible; }
     .nav-links { display: flex; align-items: center; gap: 2.2rem; list-style: none; }
@@ -234,19 +185,25 @@
     .nav-close svg { width: 30px; height: 30px; }
 
     /* ════════════════════════════════════════════════════════════════
-       ★ TRAVELLING MONOGRAM — hero centre → nav slot (the §3 Home logo-drop)
+       LOGO — travels from its large home in #intro up into the nav slot
+       as the page scrolls (Direction-4 mechanic). The anchor's own image
+       stays visibility:hidden — it only reserves layout space; the one
+       visible copy is #traveller, a fixed element the JS interpolates
+       between the anchor's measured rect and the nav slot's rect. Only
+       one copy is ever painted, so there's no duplicate/flying artifact
+       as long as travelDist is (re-)measured after layout settles.
        ════════════════════════════════════════════════════════════════ */
-    #traveller { position: fixed; top: 0; left: 0; z-index: 110; transform-origin: top left; will-change: transform; pointer-events: auto; }
-    #traveller img { width: 100%; height: auto; display: block; }
-    body.static-logo #traveller { display: none; }
-    /* §3 Home #1 + #4: hero shows the full lockup (monogram + subtitle stacked),
-       but ONLY the compact monogram travels into the nav (PDF p2, "Movement from
-       direction 4"). The subtitle line never travels — at nav size it would be
-       an illegible smudge. */
-    .monogram-anchor { width: clamp(240px, 34vw, 420px); margin: 0 auto 2.2rem; }
+    .monogram-anchor { width: clamp(240px, 34vw, 420px); margin: 0 auto 2.2rem; position: relative; }
     .monogram-anchor .anchor-twin { width: 100%; height: auto; display: block; visibility: hidden; }
     body.static-logo .monogram-anchor .anchor-twin { visibility: visible; }
-    .hero-subtitle { display: block; width: 86.9%; height: auto; margin: 0.6rem auto 0; } /* 399/459 = subtitle:monogram width in the source lockup */
+    .hero-subtitle { display: block; width: 86.9%; height: auto; margin: 0.6rem auto 0; } /* 399/459 = subtitle:monogram width in the source lockup; stays static, never travels */
+
+    #traveller {
+      position: fixed; top: 0; left: 0; z-index: 110;
+      transform-origin: top left; will-change: transform; pointer-events: auto;
+    }
+    #traveller img { width: 100%; height: auto; display: block; }
+    body.static-logo #traveller { display: none; }
 
     /* ── LOGO RENDERING ──
        The supplied DJH Logo.png ships an OPAQUE WHITE background (would show a
@@ -258,75 +215,108 @@
        matched full lockup for both themes, also resolves gap #9. */
 
     /* ════════════════════════════════════════════════════════════════
-       HERO (Home)
+       HERO (Home) — photo only, two independently-positioned text pieces:
+       the catchphrase near the top (above the team), the firm name at the
+       bottom. Nothing else lives here any more — logo/description/CTAs
+       moved to #intro, right below.
        ════════════════════════════════════════════════════════════════ */
     #hero {
-      min-height: 92vh;
-      background:
-        radial-gradient(110% 80% at 50% -20%, var(--hero-glow-1) 0%, transparent 55%),
-        radial-gradient(80% 60% at 85% 110%, var(--hero-glow-2) 0%, transparent 60%),
-        var(--bg);
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      text-align: center;
-      padding: calc(var(--nav-h) + 3rem) clamp(1.25rem, 5vw, 4rem) 5rem;
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+      isolation: isolate; /* own stacking context, so the ink backstop below paints under the photo/scrim, not over them */
+      background: var(--ink); /* backstop for the photo/scrim's fractional-pixel edge — hides any seam as dark, not the page's cream */
+      color: var(--paper); /* hero text always reads light over the photo */
+    }
+    .hero-photo { position: absolute; inset: 0; z-index: -3; }
+    .hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 12%; display: block; }
+    .hero-scrim {
+      position: absolute; inset: 0; z-index: -2;
+      background: linear-gradient(180deg,
+        rgba(20,23,26,0.62) 0%, rgba(20,23,26,0.30) 20%,
+        rgba(20,23,26,0.38) 62%, rgba(20,23,26,0.86) 100%);
+    }
+    /* Catchphrase sits just above the team — near the top of the photo,
+       clear of the models' heads — same x-axis centring as the firm name. */
+    /* Centred via left:0/right:0/margin:auto rather than the usual
+       left:50%+translateX(-50%) — this element also carries .h-in, whose
+       body.hero-loaded rule resets `transform` to none (higher specificity),
+       which would silently wipe out a translateX-based centering. */
+    .hero-motto {
+      position: absolute; top: 4rem; left: 0; right: 0; margin: 0 auto;
+      width: min(90vw, 640px); text-align: center;
+      font-family: var(--serif); font-style: italic; font-weight: 500;
+      font-size: clamp(2rem, 4.5vw, 3.4rem);
+      color: var(--paper); line-height: 1.08; letter-spacing: -0.015em;
+    }
+    .hero-motto .champ { color: var(--accent-text-dark); }
+    /* Firm name — unchanged position (bottom, centred); same no-transform
+       centring technique as .hero-motto, for the same reason. */
+    .hero-firmname {
+      position: absolute; left: 0; right: 0; margin: 0 auto; bottom: 2rem;
+      width: max-content; max-width: 90vw;
+      font-family: var(--firm-serif); font-weight: 500;
+      font-size: clamp(0.95rem, 2vw, 1.25rem);
+      letter-spacing: 0.02em; color: var(--paper);
+      text-align: center; text-wrap: balance;
+    }
+    .h-in { opacity: 0; transform: translateY(18px); transition: opacity 1s var(--ease), transform 1s var(--ease); }
+    body.hero-loaded .h-in { opacity: 1; transform: none; }
+    body.hero-loaded .hero-motto { transition-delay: 0.1s; }
+    body.hero-loaded .hero-firmname { transition-delay: 0.3s; }
+
+    /* ════════════════════════════════════════════════════════════════
+       INTRO — the original hero content (logo, description, CTAs) on its
+       own plain section, right below the photo hero. No catchphrase or
+       firm name here — both live in #hero above.
+       ════════════════════════════════════════════════════════════════ */
+    #intro {
+      background: var(--bg);
+      padding: clamp(4rem, 9vw, 7rem) clamp(1.25rem, 5vw, 4rem);
+      display: flex; flex-direction: column; align-items: center; text-align: center;
       position: relative;
     }
-    .hero-eyebrow { margin-bottom: 1.1rem; }
-    .hero-motto {
-      font-family: var(--serif); font-style: italic; font-weight: 500;
-      font-size: clamp(2.6rem, 6vw, 4.6rem);
-      color: var(--text); line-height: 1.05; letter-spacing: -0.015em;
-      max-width: 18ch; margin: 0 auto 1.4rem;
-    }
-    .hero-motto .champ { color: var(--accent-text); }
     .hero-sub { font-size: 1.02rem; font-weight: 300; color: var(--text-muted); max-width: 560px; margin: 0 auto 2.6rem; line-height: 1.8; }
     .hero-cta { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
     .hero-scroll-hint {
-      position: absolute; bottom: 2.2rem; left: 50%; transform: translateX(-50%);
+      margin-top: 3rem;
       color: var(--text-soft); display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
       font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase;
     }
     .hero-scroll-hint svg { width: 16px; height: 16px; stroke: var(--accent); animation: drift 2.4s var(--ease) infinite; }
     @keyframes drift { 0%,100% { transform: translateY(0); opacity: 0.9; } 50% { transform: translateY(6px); opacity: 0.4; } }
-    .h-in { opacity: 0; transform: translateY(18px); transition: opacity 1s var(--ease), transform 1s var(--ease); }
-    body.hero-loaded .h-in { opacity: 1; transform: none; }
-    body.hero-loaded .hero-motto { transition-delay: 0.1s; }
-    body.hero-loaded .hero-sub { transition-delay: 0.22s; }
-    body.hero-loaded .hero-cta { transition-delay: 0.34s; }
 
     /* ════════════════════════════════════════════════════════════════
        ABOUT — Dir-4 narrated scroll (story)
        ════════════════════════════════════════════════════════════════ */
     #about { background: var(--bg-alt); padding: clamp(5rem, 10vw, 8rem) clamp(1.25rem, 5vw, 4rem); }
-    .story-inner { max-width: var(--maxw); margin: 0 auto; display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(3rem, 6vw, 5.5rem); }
+    .story-inner { max-width: var(--maxw); margin: 0 auto; display: grid; grid-template-columns: 1.3fr 0.7fr; gap: clamp(2.5rem, 5vw, 4rem); }
     .story-intro { position: sticky; top: calc(var(--nav-h) + 3rem); align-self: start; }
     .story-lede { font-size: 1.06rem; line-height: 1.85; color: var(--text-muted); margin-bottom: 2.2rem; max-width: 46ch; }
-    .story-img { position: relative; aspect-ratio: 4 / 3; will-change: transform; overflow: hidden; background: var(--ph-bg); isolation: isolate; }
-    .story-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    /* Full-width, centred below the text/beats row (was confined to the text
+       column) — no more dead space beside it, and it now reads as a full
+       statement rather than a narrow column illustration. */
+    .story-img { position: relative; max-width: var(--maxw); margin: clamp(3rem, 6vw, 4.5rem) auto 0; aspect-ratio: 16 / 9; will-change: transform; overflow: hidden; background: var(--ph-bg); isolation: isolate; }
+    .story-img img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; display: block; }
     .story-img::after { content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none; background: linear-gradient(135deg, rgba(20,23,26,0.30), var(--accent-soft)); mix-blend-mode: multiply; }
-    .img-ph { position: absolute; inset: 0; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.6rem;
-      background: repeating-linear-gradient(45deg, var(--accent-soft) 0 12px, transparent 12px 24px), var(--ph-bg); }
-    .img-ph svg { width: 30px; height: 30px; stroke: var(--accent-text); }
-    .img-ph span { font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-text); font-weight: 600; text-align: center; padding: 0 1rem; }
-    .img-ph .ph-note { font-size: 0.58rem; letter-spacing: 0.08em; opacity: 0.75; text-transform: none; }
 
-    .story-beats { position: relative; padding-left: 2.6rem; }
-    .thread { position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: var(--border); }
-    .thread-fill { position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: linear-gradient(180deg, var(--accent) 0%, var(--accent) 70%, var(--accent-soft) 100%); transform-origin: top; transform: scaleY(0); }
-    .beat { position: relative; padding: 1.6rem 0; }
+    .story-beats { position: relative; padding-left: 1.9rem; }
+    /* §3: tighter vertical rhythm — same five facts, roughly half the height,
+       so the stat column reads as a compact block rather than a long scroll */
+    .beat { position: relative; padding: 0.7rem 0; }
     .beat + .beat { border-top: 1px solid var(--border); }
-    .beat::before { content: ""; position: absolute; left: -2.6rem; top: 2.05rem; width: 9px; height: 9px; margin-left: -4px; border-radius: 50%; background: var(--bg-alt); border: 1.5px solid var(--border-strong); transition: background 0.5s var(--ease), border-color 0.5s var(--ease), box-shadow 0.5s var(--ease); }
+    .beat::before { content: ""; position: absolute; left: -1.9rem; top: 1.15rem; width: 8px; height: 8px; margin-left: -4px; border-radius: 50%; background: var(--bg-alt); border: 1.5px solid var(--border-strong); transition: background 0.5s var(--ease), border-color 0.5s var(--ease), box-shadow 0.5s var(--ease); }
     .beat.visible::before { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 0 5px var(--accent-soft); }
-    .beat-num { font-family: var(--serif); font-size: clamp(1.9rem, 3vw, 2.5rem); color: var(--text); line-height: 1; margin-bottom: 0.3rem; }
+    .beat-num { font-family: var(--serif); font-size: clamp(1.35rem, 2.1vw, 1.7rem); color: var(--text); line-height: 1; margin-bottom: 0.2rem; }
     .beat-num em { font-style: normal; color: var(--accent-text); }
-    .beat-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-text); }
+    .beat-label { font-size: 0.64rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-text); }
     .beat-body { opacity: 0; transform: translateY(16px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
     .beat.visible .beat-body { opacity: 1; transform: none; }
 
     /* ════════════════════════════════════════════════════════════════
        SERVICES — Dir-2 bordered grid, hover-invert (base: Direction 2)
        ════════════════════════════════════════════════════════════════ */
-    #services { background: var(--bg); padding: clamp(5rem, 10vw, 8rem) clamp(1.25rem, 5vw, 4rem); }
+    #services { background: var(--bg-alt); padding: clamp(5rem, 10vw, 8rem) clamp(1.25rem, 5vw, 4rem); }
     .services-inner { max-width: var(--maxw); margin: 0 auto; }
     .services-head { max-width: 640px; margin-bottom: 3rem; }
     .services-head p { color: var(--text-muted); font-size: 1.02rem; }
@@ -337,7 +327,6 @@
       overflow: hidden; }
     .service-card .s-icon { width: 46px; height: 46px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.15rem; }
     .service-card .s-icon svg { width: 26px; height: 26px; stroke: var(--accent-2); transition: stroke 0.3s var(--ease); }
-    html[data-hero="dark"] .service-card .s-icon svg { stroke: var(--accent-text); }
     .service-card h4 { font-size: 1.3rem; color: var(--text); margin-bottom: 0.5rem; }
     .service-card p { font-size: 0.9rem; line-height: 1.6; color: var(--text-muted); }
     .service-card:hover .s-icon svg { stroke: var(--accent-text); }
@@ -383,7 +372,8 @@
     /* ════════════════════════════════════════════════════════════════
        TEAM — Dir-2 tiles, light in default theme (base: Direction 2)
        ════════════════════════════════════════════════════════════════ */
-    #team { background: var(--bg-alt); padding: clamp(5rem, 10vw, 8rem) clamp(1.25rem, 5vw, 4rem); }
+    /* Bottom padding is now owned by .bts-band so its tint can run flush to the section's bottom edge */
+    #team { background: var(--bg-alt); padding: clamp(5rem, 10vw, 8rem) clamp(1.25rem, 5vw, 4rem) 0; }
     .team-inner { max-width: var(--maxw); margin: 0 auto; }
     .team-head { margin-bottom: 3rem; max-width: 560px; }
     .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2.75rem 2rem; }
@@ -391,7 +381,7 @@
     .team-avatar { width: 100%; aspect-ratio: 1 / 1; max-width: 240px; position: relative; border: 1.5px solid var(--accent); margin: 0 auto 1.3rem; overflow: hidden; background: var(--surface);
       transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease); }
     .team-avatar .initials { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 2.6rem; font-weight: 600; color: var(--accent-text); letter-spacing: 0.04em; }
-    .team-avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .team-avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; }
     .team-card:hover .team-avatar { transform: translateY(-5px); box-shadow: 0 22px 38px -20px var(--shadow-card); }
     /* Flashlight glow on the avatar tiles — same tokens + single-listener
        pattern as Services. Pseudo layers only; never intercepts the card
@@ -421,6 +411,12 @@
     .team-role { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-text); margin-bottom: 0.3rem; }
     .team-qual { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.6rem; }
     .team-qual.placeholder { color: var(--accent-text); font-weight: 600; border: 1px dashed var(--border-strong); padding: 0.15rem 0.5rem; display: inline-block; border-radius: 3px; font-size: 0.74rem; letter-spacing: 0.02em; }
+    /* §5.3: confirmed attorney emails under each card */
+    .team-email { margin: -0.2rem 0 0.6rem; font-size: 0.8rem; }
+    .team-email a { color: var(--accent-text); text-decoration: underline; text-decoration-color: var(--border-strong); text-underline-offset: 2px; }
+    .team-email a:hover { text-decoration-color: var(--accent); }
+    /* Real portrait present → hide the initials fallback (still read by JS for the modal avatar) */
+    .team-avatar.has-photo .initials { display: none; }
     /* Bios open in a centered modal (below) -- cards stay uniform tiles, the
        grid never desyncs. The trigger is a real <button> for keyboard access. */
     .team-card { cursor: pointer; }
@@ -434,9 +430,32 @@
     .team-bio-btn .chev { display: inline-flex; transition: transform 0.3s var(--ease); }
     .team-card:hover .team-bio-btn .chev { transform: translateX(3px); }
 
+    /* ════════════════════════════════════════════════════════════════
+       BEHIND THE SCENES (rebuilt 2026-07-21) — full-width 4×2 grid.
+       Photos are pre-cropped to an exact square server-side, so there is
+       no runtime object-fit:cover crop decision for the browser to make —
+       .bts-photo just scales a same-aspect-ratio image, no cropping.
+       ════════════════════════════════════════════════════════════════ */
+    .bts-band {
+      width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);
+      margin-top: clamp(3.5rem, 7vw, 5.5rem);
+      background: var(--support-bg);
+      padding: clamp(3.5rem, 7vw, 5.5rem) clamp(1.25rem, 5vw, 4rem) clamp(5rem, 10vw, 8rem);
+    }
+    .bts-head { max-width: var(--maxw); margin: 0 auto 2.5rem; }
+    .bts-heading { font-family: var(--serif); font-weight: 500; font-size: clamp(1.3rem, 2.4vw, 1.65rem); color: var(--text); margin-top: 0.6rem; }
+    /* Deliberately NOT capped at --maxw — spans the full width the band's own
+       side padding leaves, so 8 cards read as a proper 4×2 grid filling the
+       screen rather than a small cluster in the centre column. */
+    .bts-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(2.5rem, 4vw, 4rem) clamp(1.5rem, 3vw, 3rem); }
+    .bts-card { display: flex; flex-direction: column; align-items: center; text-align: center; }
+    .bts-photo { display: block; width: 100%; max-width: 220px; aspect-ratio: 1 / 1; margin: 0 auto 1.1rem; border: 1px solid var(--border-strong); background: var(--surface); transition: transform 0.3s var(--ease); }
+    .bts-card:hover .bts-photo { transform: translateY(-3px); }
+    .bts-name { font-family: var(--serif); font-size: clamp(1.05rem, 1.3vw, 1.2rem); color: var(--text); margin-bottom: 0.2rem; }
+    .bts-role { font-size: 0.76rem; letter-spacing: 0.05em; color: var(--text-muted); line-height: 1.4; }
+
     /* -- BIO MODAL: centre-scaling dialog over a scrim; matches the site's
-       centred/symmetric axis. Surface/text ride the [data-hero] role tokens,
-       accents ride the accent token -- themed automatically on every toggle. */
+       centred/symmetric axis. Surface/text/accent ride the shared role tokens. */
     .bio-modal {
       position: fixed; inset: 0; z-index: 500;
       display: flex; align-items: center; justify-content: center;
@@ -474,7 +493,10 @@
       width: 86px; height: 86px; flex-shrink: 0; position: relative;
       border: 1.5px solid var(--accent); background: var(--bg-alt);
       display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
     }
+    .bio-modal-avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .bio-modal-avatar.has-photo .initials { display: none; }
     .bio-modal-avatar .initials { font-family: var(--serif); font-size: 1.9rem; font-weight: 600; color: var(--accent-text); letter-spacing: 0.04em; }
     .bio-modal-head h3 { font-size: clamp(1.35rem, 3vw, 1.7rem); margin-bottom: 0.3rem; }
     .bio-modal-body { overflow-y: auto; font-size: 0.95rem; line-height: 1.8; color: var(--text-muted); padding-right: 0.4rem; }
@@ -491,8 +513,7 @@
        ════════════════════════════════════════════════════════════════ */
     #reviews { position: relative; overflow: hidden; color: var(--paper); padding: clamp(5rem, 10vw, 7.5rem) clamp(1.25rem, 5vw, 4rem); isolation: isolate; }
     .reviews-bg { position: absolute; inset: 0; z-index: -2; }
-    .reviews-bg .img-ph { background: repeating-linear-gradient(45deg, rgba(199,160,106,0.08) 0 14px, transparent 14px 28px), #232a2b; }
-    .reviews-bg .img-ph svg, .reviews-bg .img-ph span { color: var(--paper-60); stroke: var(--paper-60); }
+    .reviews-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
     .reviews-overlay { position: absolute; inset: 0; z-index: -1; background:
       radial-gradient(90% 100% at 15% 0%, rgba(20,23,26,0.55) 0%, transparent 60%),
       linear-gradient(180deg, rgba(20,23,26,0.55), rgba(45,99,109,0.62)); }
@@ -552,19 +573,21 @@
     .social-row .s-link { width: 40px; height: 40px; border: 1px solid var(--border-strong); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text); transition: color 0.25s var(--ease), border-color 0.25s var(--ease); }
     .social-row .s-link:hover { color: var(--accent-text); border-color: var(--accent); }
     .social-row .s-link svg { width: 18px; height: 18px; }
-    .social-tbc { width: 100%; font-size: 0.66rem; letter-spacing: 0.06em; color: var(--text-soft); text-transform: uppercase; margin-top: 0.1rem; }
 
     .contact-col { display: flex; flex-direction: column; gap: 1.5rem; }
-    /* Form card is an ink panel in BOTH themes — a deliberate anchor of the dark identity */
-    .contact-form { background: var(--ink); padding: clamp(1.6rem, 3vw, 2.4rem); display: flex; flex-direction: column; gap: 1.05rem; box-shadow: 0 36px 70px -38px var(--shadow-card); }
+    /* §6: form card is a fixed light panel in BOTH hero-style toggle states — ported
+       from the Direction-1 source (white card, tan-soft fields, sienna labels).
+       This reverses the prior "ink panel in both themes" default; see CLAUDE.md §4. */
+    .contact-form { background: var(--form-surface); border-radius: 6px; padding: clamp(1.6rem, 3vw, 2.4rem); display: flex; flex-direction: column; gap: 1.05rem; box-shadow: 0 30px 60px -30px rgba(20,23,26,0.35); }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; }
-    .field label { display: block; font-size: 0.62rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem; }
-    .field input, .field textarea { width: 100%; padding: 0.8rem 1rem; background: rgba(246,243,238,0.06); border: 1px solid rgba(246,243,238,0.16); color: var(--paper); font-family: var(--sans); font-size: 0.94rem; transition: border-color 0.25s var(--ease), background 0.25s var(--ease); }
-    .field input::placeholder, .field textarea::placeholder { color: rgba(246,243,238,0.32); }
-    .field input:focus, .field textarea:focus { outline: none; border-color: var(--accent); background: rgba(246,243,238,0.1); }
+    .field label { display: block; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--form-label); margin-bottom: 0.4rem; }
+    .field input, .field textarea { width: 100%; padding: 0.8rem 0.95rem; background: var(--form-field); border: 1.5px solid transparent; border-radius: 4px; color: var(--form-text); font-family: var(--sans); font-size: 0.94rem; transition: border-color 0.25s var(--ease), background 0.25s var(--ease); }
+    .field input::placeholder, .field textarea::placeholder { color: var(--form-placeholder); }
+    .field input:focus, .field textarea:focus { outline: none; border-color: var(--accent); background: var(--form-surface); }
     .field textarea { min-height: 104px; resize: vertical; }          /* §3 Contact #2: form slightly smaller to make room for photo */
     .contact-form .btn { align-self: flex-start; margin-top: 0.3rem; }
     .contact-photo { aspect-ratio: 16 / 7; position: relative; overflow: hidden; background: var(--ph-bg); isolation: isolate; }
+    .contact-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 25%; display: block; }
     /* Full-width Google Maps embed band below the grid. Google's iframe stays
        light in dark hero (accepted) — framed with border/shadow so it reads as
        an intentional window. Sharp corners match the form/photo cards. */
@@ -592,50 +615,13 @@
     .reveal-stagger.visible > * { opacity: 1; transform: none; }
 
     /* ════════════════════════════════════════════════════════════════
-       CUSTOMIZER PANEL — the tool chrome (own fixed palette, always legible)
-       ════════════════════════════════════════════════════════════════ */
-    .cz-panel {
-      position: fixed; z-index: 400; right: 1.1rem; bottom: 1.1rem;
-      width: min(320px, calc(100vw - 2rem));
-      background: #14171A; color: #F6F3EE;
-      border: 1px solid rgba(246,243,238,0.16); border-radius: 12px;
-      box-shadow: 0 30px 60px -24px rgba(0,0,0,0.7);
-      font-family: 'Inter', -apple-system, 'Segoe UI', sans-serif;
-      transform: translateY(0); transition: transform 0.4s var(--ease);
-    }
-    .cz-head { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 0.9rem 1.1rem; border-bottom: 1px solid rgba(246,243,238,0.12); }
-    .cz-title { display: flex; align-items: center; gap: 0.55rem; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: #C09464; }
-    .cz-title svg { width: 16px; height: 16px; }
-    .cz-collapse { background: none; border: none; color: #F6F3EE; cursor: pointer; padding: 0.2rem; display: inline-flex; }
-    .cz-collapse svg { width: 20px; height: 20px; transition: transform 0.3s var(--ease); }
-    .cz-body { padding: 1rem 1.1rem 1.15rem; }
-    .cz-group { margin-bottom: 1rem; }
-    .cz-group:last-of-type { margin-bottom: 0.5rem; }
-    .cz-legend { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(246,243,238,0.55); margin-bottom: 0.45rem; }
-    .cz-seg { display: flex; gap: 4px; background: rgba(246,243,238,0.06); border: 1px solid rgba(246,243,238,0.12); border-radius: 8px; padding: 4px; }
-    .cz-opt { flex: 1; font-family: inherit; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.02em; padding: 0.5rem 0.35rem; border-radius: 5px; border: none; background: transparent; color: rgba(246,243,238,0.6); cursor: pointer; transition: background 0.25s var(--ease), color 0.25s var(--ease); white-space: nowrap; }
-    .cz-opt:hover { color: #F6F3EE; }
-    .cz-opt[aria-pressed="true"] { background: #C09464; color: #14171A; }
-    .cz-swatch { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 5px; vertical-align: middle; }
-    .cz-reset { width: 100%; margin-top: 0.85rem; font-family: inherit; font-size: 0.66rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.6rem; border-radius: 7px; border: 1px solid rgba(246,243,238,0.25); background: transparent; color: #F6F3EE; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem; transition: border-color 0.25s var(--ease), background 0.25s var(--ease); }
-    .cz-reset:hover { border-color: #C09464; background: rgba(192,148,100,0.12); }
-    .cz-reset svg { width: 14px; height: 14px; }
-    .cz-share { margin-top: 1rem; padding-top: 0.85rem; border-top: 1px solid rgba(246,243,238,0.12); }
-    .cz-state { font-size: 0.8rem; font-weight: 600; color: #F6F3EE; margin: 0 0 0.6rem; letter-spacing: 0.02em; }
-    .cz-copy { width: 100%; font-family: inherit; font-size: 0.66rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.6rem; border-radius: 7px; border: 1px solid #C09464; background: #C09464; color: #14171A; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem; transition: background 0.25s var(--ease), border-color 0.25s var(--ease); }
-    .cz-copy:hover { background: #D2AD83; border-color: #D2AD83; }
-    .cz-copy svg { width: 14px; height: 14px; }
-    .cz-panel.collapsed { transform: translateY(calc(100% - 46px)); }
-    .cz-panel.collapsed .cz-collapse svg { transform: rotate(180deg); }
-    .cz-panel:focus-visible, .cz-opt:focus-visible, .cz-reset:focus-visible, .cz-collapse:focus-visible { outline: 2.5px solid #C09464; outline-offset: 2px; }
-
-    /* ════════════════════════════════════════════════════════════════
        RESPONSIVE
        ════════════════════════════════════════════════════════════════ */
     @media (max-width: 960px) {
       .story-inner { grid-template-columns: 1fr; }
       .story-intro { position: static; }
       .contact-inner { grid-template-columns: 1fr; }
+      .bts-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 768px) {
       .nav-links { display: none; }
@@ -646,7 +632,6 @@
       .form-row { grid-template-columns: 1fr; }
       .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
       .services-grid { grid-template-columns: 1fr; }
-      .cz-panel { right: 0.6rem; bottom: 0.6rem; left: 0.6rem; width: auto; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -654,7 +639,6 @@
       *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
       .reveal, .reveal-stagger > *, .h-in, .beat-body { opacity: 1 !important; transform: none !important; }
       .stars svg { opacity: 1 !important; transform: none !important; }
-      .thread-fill { transform: none !important; }
       .hero-scroll-hint svg { animation: none !important; }
     }
   </style>
@@ -664,7 +648,7 @@
   <!-- ══ NAV ══ -->
   <nav id="nav" aria-label="Main navigation">
     <a class="nav-logo-slot" id="navSlot" href="#hero" aria-label="DJH Attorneys home">
-      <img src="./assets/DJH-monogram-ink.png" data-ink="./assets/DJH-monogram-ink.png" data-paper="./assets/DJH-monogram-paper.png" alt="De Jager Hattingh Attorneys" id="slotImg" class="logo-themed" />
+      <img src="./assets/DJH-monogram-ink.png" alt="De Jager Hattingh Attorneys" id="slotImg" />
     </a>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
@@ -681,7 +665,7 @@
   <!-- ══ MOBILE MENU ══ -->
   <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
     <div class="mobile-menu-top">
-      <img src="./assets/DJH-monogram-ink.png" data-ink="./assets/DJH-monogram-ink.png" data-paper="./assets/DJH-monogram-paper.png" alt="De Jager Hattingh Attorneys" class="logo-themed" />
+      <img src="./assets/DJH-monogram-ink.png" alt="De Jager Hattingh Attorneys" />
       <button class="nav-close" id="navClose" aria-label="Close menu">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
       </button>
@@ -693,21 +677,29 @@
     <a href="#contact" class="btn btn-primary">Get in Touch</a>
   </div>
 
-  <!-- ★ THE TRAVELLING MONOGRAM (fixed; JS interpolates hero → nav) -->
+  <!-- ★ THE TRAVELLING MONOGRAM (fixed; JS interpolates #intro → nav) -->
   <a id="traveller" href="#hero" aria-label="DJH Attorneys home">
-    <img src="./assets/DJH-monogram-ink.png" data-ink="./assets/DJH-monogram-ink.png" data-paper="./assets/DJH-monogram-paper.png" alt="" aria-hidden="true" id="travImg" class="logo-themed" />
+    <img src="./assets/DJH-monogram-ink.png" alt="" aria-hidden="true" id="travImg" />
   </a>
 
-  <!-- ══ HERO (Home) ══ -->
+  <!-- ══ HERO (Home) — photo + catchphrase (near top) + firm name (bottom) only ══ -->
   <header id="hero">
-    <div class="monogram-anchor" id="monogramAnchor">
-      <img src="./assets/DJH-monogram-ink.png" data-ink="./assets/DJH-monogram-ink.png" data-paper="./assets/DJH-monogram-paper.png" alt="De Jager Hattingh Attorneys monogram" class="logo-themed anchor-twin" />
-      <img src="./assets/DJH-subtitle-ink.png" data-ink="./assets/DJH-subtitle-ink.png" data-paper="./assets/DJH-subtitle-paper.png" alt="Attorneys, Notaries &amp; Conveyancers" class="logo-themed hero-subtitle" />
+    <div class="hero-photo" aria-hidden="true">
+      <img src="./assets/photos/hero-team.jpg" alt="" />
     </div>
-    <span class="eyebrow hero-eyebrow h-in">De Jager Hattingh · Attorneys, Notaries &amp; Conveyancers</span>
+    <div class="hero-scrim" aria-hidden="true"></div>
     <h1 class="hero-motto h-in">Not your <span class="champ">average</span> lawyers.</h1>
-    <p class="hero-sub h-in">A 100% female-owned boutique law firm in Middelburg, Mpumalanga, providing practical, tailored legal advice rather than one-size-fits-all solutions.</p>
-    <div class="hero-cta h-in">
+    <p class="hero-firmname h-in">De Jager Hattingh Attorneys, Notaries &amp; Conveyancers</p>
+  </header>
+
+  <!-- ══ INTRO — the original hero's logo + description + CTAs, no catchphrase/firm-name repeat ══ -->
+  <section id="intro" aria-label="Introduction">
+    <div class="monogram-anchor" id="monogramAnchor">
+      <img src="./assets/DJH-monogram-ink.png" alt="De Jager Hattingh Attorneys monogram" class="anchor-twin" />
+      <img src="./assets/DJH-subtitle-ink.png" alt="Attorneys, Notaries &amp; Conveyancers" class="hero-subtitle" />
+    </div>
+    <p class="hero-sub reveal">A 100% female-owned boutique law firm in Middelburg, Mpumalanga, providing practical, tailored legal advice rather than one-size-fits-all solutions.</p>
+    <div class="hero-cta reveal">
       <a href="#contact" class="btn btn-primary">
         Get in Touch
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -718,7 +710,7 @@
       <span>Scroll</span>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
     </div>
-  </header>
+  </section>
 
   <main>
 
@@ -731,16 +723,9 @@
           <h2 class="serif-heading">Precision. Purpose. Personal.</h2>
           <!-- §3 About #2: intro replaced verbatim -->
           <p class="story-lede">What began as an overnight decision in 2022 has grown into a successful and steadily expanding boutique law firm. Led by director Mignon de Jager Hattingh, a seasoned attorney specialising in commercial law and contracts, the firm is built on hard work, dedication, and a commitment to achieving the best possible outcomes for its clients. The DJH team provides practical, tailored legal advice, recognising that every client and every matter is unique.</p>
-          <div class="story-img">
-            <div class="img-ph" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
-              <span>Placeholder image<span class="ph-note"> · photoshoot asset pending</span></span>
-            </div>
-          </div>
         </div>
 
         <div class="story-beats" id="storyBeats">
-          <div class="thread" aria-hidden="true"><span class="thread-fill" id="threadFill"></span></div>
           <!-- §3 About #3: sub-wording beneath each point removed (kept num + label only) -->
           <div class="beat">
             <div class="beat-body"><p class="beat-num">20<em>22</em></p><p class="beat-label">Founded</p></div>
@@ -760,6 +745,11 @@
             <div class="beat-body"><p class="beat-num">Twe<em>lve</em></p><p class="beat-label">Practice Areas</p></div>
           </div>
         </div>
+      </div>
+
+      <!-- Full-width, centred — no longer confined to the text column -->
+      <div class="story-img reveal">
+        <img src="./assets/photos/about-story.jpg" alt="The De Jager Hattingh team in the firm's offices" loading="lazy" />
       </div>
     </section>
 
@@ -853,38 +843,101 @@
         </div>
         <div class="team-grid reveal-stagger">
           <div class="team-card">
-            <div class="team-avatar"><span class="initials" aria-hidden="true">MH</span></div>
+            <div class="team-avatar has-photo"><img src="./assets/photos/mignon-de-jager-hattingh.jpg" alt="Mignon de Jager Hattingh" loading="lazy" /><span class="initials" aria-hidden="true">MH</span></div>
             <p class="team-name">Mignon de Jager Hattingh</p>
             <p class="team-role">Director · Notary</p>
             <p class="team-qual">LLB, NWU</p>
+            <!-- §5.3: confirmed attorney email -->
+            <p class="team-email"><a href="mailto:mignon@djhattorneys.co.za">mignon@djhattorneys.co.za</a></p>
             <div class="team-bio-full" hidden><p>Mignon founded the firm in 2022 with a passion for providing practical, detail-oriented legal services. She obtained her Bachelor of Laws degree from the North-West University in 2017. After completing her articles, she was admitted as an attorney and later went on to qualify as a notary. Her commitment to excellence was recognised when she achieved the highest mark in the province in the Notarial Practice examination. Mignon specialises in commercial law and has experience in a wide range of commercial matters, particularly in the mining industry. She is highly experienced in drafting, reviewing and negotiating contracts, providing clients with practical legal solutions. She believes in building long-term relationships with clients and is committed to providing each client with personal attention and practical legal solutions.</p></div>
             <button class="team-bio-btn" type="button"><span class="chev" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>Read bio</button>
           </div>
           <div class="team-card">
-            <div class="team-avatar"><span class="initials" aria-hidden="true">AL</span></div>
+            <div class="team-avatar has-photo"><img src="./assets/photos/angelique-laas.jpg" alt="Angelique Laas" loading="lazy" /><span class="initials" aria-hidden="true">AL</span></div>
             <p class="team-name">Angelique Laas</p>
             <p class="team-role">Senior Associate</p>
             <p class="team-qual">LLB, UNISA</p>
+            <!-- §5.3: confirmed attorney email -->
+            <p class="team-email"><a href="mailto:angelique@djhattorneys.co.za">angelique@djhattorneys.co.za</a></p>
             <div class="team-bio-full" hidden><!-- Join date "December 2025" printed verbatim per ruling #6 (flagged for confirmation in report) -->
               <p>Angelique, a senior attorney at the firm, obtained her LLB degree from the University of South Africa in 2013 and was admitted as an attorney in 2015. She joined the firm in December 2025, and since then, she has become an invaluable member of the team. Angelique specialises in civil litigation across a broad range of legal fields. Her extensive knowledge of civil procedure and substantive law, coupled with her strategic and meticulous approach to litigation, makes her a trusted advisor and a strong advocate for clients involved in legal disputes.</p></div>
             <button class="team-bio-btn" type="button"><span class="chev" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>Read bio</button>
           </div>
           <div class="team-card">
-            <div class="team-avatar"><span class="initials" aria-hidden="true">BM</span></div>
+            <div class="team-avatar has-photo"><img src="./assets/photos/boitumelo-mphela.jpg" alt="Boitumelo Mphela" loading="lazy" /><span class="initials" aria-hidden="true">BM</span></div>
             <p class="team-name">Boitumelo Mphela</p>
             <p class="team-role">Junior Associate</p>
-            <!-- §3 Team #3: "LLB"→"LLM". Held as marked placeholder per ruling #5 — literal "LLM, UFS" is factually wrong (LLM is UNISA). -->
-            <p class="team-qual placeholder" title="Awaiting DJH confirmation">CONFIRM: LLM, UNISA?</p>
-            <div class="team-bio-full" hidden><p>Boitumelo's journey with the firm began in 2024 when she joined the team as a candidate attorney. Through dedication, hard work, and valuable mentorship under Mignon's guidance, she steadily developed her skills and progressed to her current position as a junior associate. She obtained her Bachelor of Laws degree from the University of the Free State in 2022 and went on to complete her Master of Laws in corporate law through the University of South Africa in February 2026. Boitumelo has a keen interest in continuous professional development and aspires to qualify as a notary in the future. She possesses excellent research, drafting and analytical skills, enabling her to provide practical, well-considered legal solutions.</p></div>
+            <!-- §5.2: CONFIRMED by DJH — LLM, UFS (the earlier "CONFIRM: LLM, UNISA?" placeholder guess was wrong). Do not revert to a guess. -->
+            <p class="team-qual">LLM, UFS</p>
+            <!-- §5.3: confirmed attorney email -->
+            <p class="team-email"><a href="mailto:boitumelo@djhattorneys.co.za">boitumelo@djhattorneys.co.za</a></p>
+            <div class="team-bio-full" hidden><p>Boitumelo's journey with the firm began in 2024 when she joined the team as a candidate attorney. Through dedication, hard work, and valuable mentorship under Mignon's guidance, she steadily developed her skills and progressed to her current position as a junior associate. She obtained her Bachelor of Laws degree from the University of the Free State in 2022 and went on to complete her Master of Laws in corporate law through the University of the Free State in February 2026. Boitumelo has a keen interest in continuous professional development and aspires to qualify as a notary in the future. She possesses excellent research, drafting and analytical skills, enabling her to provide practical, well-considered legal solutions.</p></div>
             <button class="team-bio-btn" type="button"><span class="chev" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>Read bio</button>
           </div>
           <div class="team-card">
-            <div class="team-avatar"><span class="initials" aria-hidden="true">TM</span></div>
+            <div class="team-avatar has-photo"><img src="./assets/photos/thando-mofokeng.jpg" alt="Thando Mofokeng" loading="lazy" /><span class="initials" aria-hidden="true">TM</span></div>
             <p class="team-name">Thando Mofokeng</p>
             <p class="team-role">Professional Assistant</p>
             <p class="team-qual">LLB, UWC</p>
+            <!-- §5.3: confirmed attorney email -->
+            <p class="team-email"><a href="mailto:thando@djhattorneys.co.za">thando@djhattorneys.co.za</a></p>
             <div class="team-bio-full" hidden><p>Thando obtained his LLB degree from the University of the Western Cape in 2021 and joined the firm in 2026. He works closely alongside Mignon, gaining valuable practical experience and further developing his legal knowledge and skills. As he continues to grow within the profession, he remains focused on building meaningful relationships with clients and delivering service of the highest standard.</p></div>
             <button class="team-bio-btn" type="button"><span class="chev" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></span>Read bio</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ BEHIND THE SCENES — rebuilt 2026-07-21. Photos are pre-cropped to an
+           exact 1:1 square server-side (ffmpeg crop=iw:iw:0:0, matching the old
+           object-position:center-top framing) and sized to 600px — a deliberate,
+           display-matched size for a 220px box, not an oversized source left for
+           the browser to crop+downscale at runtime. New "-v2" filenames so no
+           cache, anywhere, can possibly be serving an old copy. ══ -->
+      <div class="bts-band">
+        <div class="bts-head reveal">
+          <span class="eyebrow">Behind The Scenes</span>
+          <h3 class="bts-heading">The support behind our professionals</h3>
+        </div>
+        <div class="bts-grid reveal-stagger">
+          <div class="bts-card">
+            <img class="bts-photo" src="./assets/photos/karen-de-jager-v2.jpg" alt="Karen de Jager" loading="lazy" />
+            <p class="bts-name">Karen de Jager</p>
+            <p class="bts-role">Office Manager &amp; Reception</p>
+          </div>
+          <div class="bts-card">
+            <img class="bts-photo" src="./assets/photos/nicky-rossouw-v2.jpg" alt="Nicky Rossouw" loading="lazy" />
+            <p class="bts-name">Nicky Rossouw</p>
+            <p class="bts-role">Accountant</p>
+          </div>
+          <div class="bts-card">
+            <img class="bts-photo" src="./assets/photos/mandla-mahlangu-v2.jpg" alt="Mandla Mahlangu" loading="lazy" />
+            <p class="bts-name">Mandla Mahlangu</p>
+            <p class="bts-role">Messenger</p>
+          </div>
+          <div class="bts-card">
+            <img class="bts-photo" src="./assets/photos/haley-schutte-v2.jpg" alt="Haley Schutte" loading="lazy" />
+            <p class="bts-name">Haley Schutte</p>
+            <p class="bts-role">Legal Secretary to the Director</p>
+          </div>
+          <div class="bts-card">
+            <img class="bts-photo" src="./assets/photos/zureca-coetzee-v2.jpg" alt="Zureca Coetzee" loading="lazy" />
+            <p class="bts-name">Zureca Coetzee</p>
+            <p class="bts-role">Legal Secretary to the Director</p>
+          </div>
+          <div class="bts-card">
+            <img class="bts-photo" src="./assets/photos/beame-cronje-v2.jpg" alt="Beamé Cronjé" loading="lazy" />
+            <p class="bts-name">Beamé Cronjé</p>
+            <p class="bts-role">Legal Secretary</p>
+          </div>
+          <div class="bts-card">
+            <img class="bts-photo" src="./assets/photos/ntombi-lubisi-v2.jpg" alt="Ntombi Lubisi" loading="lazy" />
+            <p class="bts-name">Ntombi Lubisi</p>
+            <p class="bts-role">Paralegal</p>
+          </div>
+          <div class="bts-card">
+            <img class="bts-photo" src="./assets/photos/sifiso-mokwana-v2.jpg" alt="Sifiso Mokwana" loading="lazy" />
+            <p class="bts-name">Sifiso Mokwana</p>
+            <p class="bts-role">Paralegal</p>
           </div>
         </div>
       </div>
@@ -892,11 +945,9 @@
 
     <!-- ══ REVIEWS — photo bg + carousel scaffold (base: Direction 4) ══ -->
     <section id="reviews" aria-label="Client reviews">
+      <!-- §1a: storefront photo now placed here per the image map -->
       <div class="reviews-bg" aria-hidden="true">
-        <div class="img-ph">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
-          <span>Background photo placeholder<span class="ph-note"> · photoshoot asset pending</span></span>
-        </div>
+        <img src="./assets/photos/storefront.jpg" alt="" />
       </div>
       <div class="reviews-overlay" aria-hidden="true"></div>
       <div class="reviews-inner reveal">
@@ -1003,11 +1054,11 @@
           </div>
 
           <!-- §3 Contact #3: Instagram + LinkedIn in addition to Facebook. URLs UNCONFIRMED → placeholders (§0). -->
+          <!-- §7: confirmed social URLs — Facebook, Instagram, LinkedIn -->
           <div class="social-row" aria-label="Social media">
-            <a class="s-link" href="#" title="Facebook — URL to be confirmed" aria-label="Facebook (URL to be confirmed)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.198 21.5h4v-8.01h3.604l.396-3.98h-4V7.5a1 1 0 0 1 1-1h3v-4h-3a5 5 0 0 0-5 5v2.01h-2l-.396 3.98h2.396v8.01Z"/></svg></a>
-            <a class="s-link" href="#" title="Instagram — URL to be confirmed" aria-label="Instagram (URL to be confirmed)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
-            <a class="s-link" href="#" title="LinkedIn — URL to be confirmed" aria-label="LinkedIn (URL to be confirmed)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>
-            <span class="social-tbc">Instagram, LinkedIn &amp; Facebook links — URLs to be confirmed by DJH</span>
+            <a class="s-link" href="https://www.facebook.com/share/18Vw8EM9wn/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" title="Facebook" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.198 21.5h4v-8.01h3.604l.396-3.98h-4V7.5a1 1 0 0 1 1-1h3v-4h-3a5 5 0 0 0-5 5v2.01h-2l-.396 3.98h2.396v8.01Z"/></svg></a>
+            <a class="s-link" href="https://www.instagram.com/djhattorneys" target="_blank" rel="noopener noreferrer" title="Instagram" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+            <a class="s-link" href="https://www.linkedin.com/company/de-jager-hattingh-attorneys-notaries-conveyancers/" target="_blank" rel="noopener noreferrer" title="LinkedIn" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>
           </div>
         </div>
 
@@ -1026,10 +1077,7 @@
           </form>
           <!-- §3 Contact #2: second photo (placeholder), enabled by the slightly smaller form -->
           <div class="contact-photo reveal">
-            <div class="img-ph" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
-              <span>Placeholder image<span class="ph-note"> · photoshoot asset pending</span></span>
-            </div>
+            <img src="./assets/photos/contact-team.jpg" alt="The De Jager Hattingh team in the firm's offices" loading="lazy" />
           </div>
         </div>
       </div>
@@ -1041,7 +1089,7 @@
           title="Map to De Jager Hattingh Attorneys, Middelburg"
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
-          src="https://www.google.com/maps?q=34%20Dolerite%20Crescent%2C%20Middelburg%2C%201050%2C%20South%20Africa&output=embed"></iframe>
+          src="https://www.google.com/maps?q=34%20Dolerite%20Crescent%2C%20Middelburg%2C%201050%2C%20South%20Africa&t=k&output=embed"></iframe>
       </div>
     </section>
 
@@ -1085,7 +1133,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
       </button>
       <div class="bio-modal-head">
-        <div class="bio-modal-avatar"><span class="initials" id="bioModalInitials" aria-hidden="true"></span></div>
+        <div class="bio-modal-avatar" id="bioModalAvatar"><img id="bioModalPhoto" alt="" hidden /><span class="initials" id="bioModalInitials" aria-hidden="true"></span></div>
         <div>
           <h3 id="bioModalName"></h3>
           <p class="team-role" id="bioModalRole"></p>
@@ -1096,70 +1144,38 @@
     </div>
   </div>
 
-  <!-- ══ CUSTOMIZER PANEL ══ -->
-  <aside class="cz-panel" id="czPanel" aria-label="Site customizer">
-    <div class="cz-head">
-      <span class="cz-title">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21v-7"/><path d="M4 10V3"/><path d="M12 21v-9"/><path d="M12 8V3"/><path d="M20 21v-5"/><path d="M20 12V3"/><path d="M1 14h6"/><path d="M9 8h6"/><path d="M17 16h6"/></svg>
-        Customize
-      </span>
-      <button class="cz-collapse" id="czCollapse" type="button" aria-label="Collapse customizer" aria-expanded="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-      </button>
-    </div>
-    <div class="cz-body" id="czBody">
-      <div class="cz-group">
-        <p class="cz-legend" id="czHeroLbl">Hero style</p>
-        <div class="cz-seg" role="group" aria-labelledby="czHeroLbl">
-          <button class="cz-opt" type="button" data-axis="hero" data-val="light" aria-pressed="true">Light</button>
-          <button class="cz-opt" type="button" data-axis="hero" data-val="dark" aria-pressed="false">Dark</button>
-        </div>
-      </div>
-      <div class="cz-group">
-        <p class="cz-legend" id="czAccentLbl">Accent palette</p>
-        <div class="cz-seg" role="group" aria-labelledby="czAccentLbl">
-          <button class="cz-opt" type="button" data-axis="accent" data-val="peru" aria-pressed="true"><span class="cz-swatch" style="background:#C09464"></span>Peru</button>
-          <button class="cz-opt" type="button" data-axis="accent" data-val="slate" aria-pressed="false"><span class="cz-swatch" style="background:#2D636D"></span>Slate</button>
-          <button class="cz-opt" type="button" data-axis="accent" data-val="sienna" aria-pressed="false"><span class="cz-swatch" style="background:#885B42"></span>Sienna</button>
-        </div>
-      </div>
-      <div class="cz-group">
-        <p class="cz-legend" id="czFontLbl">Display font</p>
-        <div class="cz-seg" role="group" aria-labelledby="czFontLbl">
-          <button class="cz-opt" type="button" data-axis="font" data-val="dir1" aria-pressed="true">Cormorant</button>
-          <button class="cz-opt" type="button" data-axis="font" data-val="playfair" aria-pressed="false">Playfair</button>
-          <button class="cz-opt" type="button" data-axis="font" data-val="lora" aria-pressed="false">Lora</button>
-        </div>
-      </div>
-      <div class="cz-share">
-        <p class="cz-legend">Current look</p>
-        <p class="cz-state" id="czState" aria-live="polite"></p>
-        <button class="cz-copy" id="czCopy" type="button">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-          <span id="czCopyLabel">Copy this look</span>
-        </button>
-      </div>
-      <button class="cz-reset" id="czReset" type="button">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
-        Reset to recommended
-      </button>
-    </div>
-  </aside>
-
   <script>
     (function () {
       'use strict';
 
       var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       var body = document.body;
-      var rootEl = document.documentElement;
       var nav = document.getElementById('nav');
 
-      var beatsWrap = document.getElementById('storyBeats');
-      var threadFill = document.getElementById('threadFill');
       var storyImg = document.querySelector('.story-img');
+      var heroEl = document.getElementById('hero');
+      var ticking = false;
 
-      /* ════ ★ TRAVELLING MONOGRAM ════ */
+      /* ════════════════════════════════════════════════════════
+         ★ TRAVELLING MONOGRAM (Direction-4 mechanic, restored)
+         One fixed element interpolated between two measured rects:
+         its large in-flow home in #intro, and the nav slot. The nav
+         itself stays hidden (opacity:0) until the journey is almost
+         done, so it fades in right as the logo arrives — nav chrome
+         never appears "in" the hero.
+
+         The journey does NOT start at scrollY 0. Because the anchor
+         sits just below the hero, tying travel distance purely to
+         "anchor's natural top === slot top" (the original Dir-4 formula,
+         which assumed the anchor lived inside the hero itself) meant the
+         easing was ~95% done by the moment the hero had merely finished
+         scrolling away — the whole shrink happened while the hero was
+         still on screen. Instead, travel is gated to only begin once
+         the hero has fully scrolled past (releaseY = hero's own height,
+         i.e. #intro's document top), then eases over a fixed, viewport-
+         relative distance — so it starts once #intro is what's on
+         screen, not mid-hero.
+         ════════════════════════════════════════════════════════ */
       var traveller = document.getElementById('traveller');
       var travImg = document.getElementById('travImg');
       var anchor = document.getElementById('monogramAnchor');
@@ -1167,190 +1183,77 @@
 
       var anchorDocTop = 0, anchorDocLeft = 0, anchorW = 0;
       var slotTop = 0, slotLeft = 0, slotW = 0;
-      var travelDist = 1, ticking = false;
+      var releaseY = 0, travelRange = 1;
 
       function measure() {
         var aRect = anchor.getBoundingClientRect();
         anchorDocTop = aRect.top + window.scrollY;
         anchorDocLeft = aRect.left + window.scrollX;
         anchorW = aRect.width;
-        var sRect = slot.getBoundingClientRect();
-        slotTop = sRect.top; slotLeft = sRect.left; slotW = sRect.width;
+        var sRect = slot.getBoundingClientRect(); // nav is fixed → viewport coords
+        slotTop = sRect.top;
+        slotLeft = sRect.left;
+        slotW = sRect.width;
         traveller.style.width = anchorW + 'px';
-        travelDist = Math.max(anchorDocTop - slotTop, 1);
+        // Don't start easing until the hero has fully scrolled past —
+        // hero's document-bottom is #intro's document-top.
+        releaseY = heroEl.getBoundingClientRect().height;
+        // Fixed, viewport-relative scroll distance for the whole ease
+        // once released — independent of how close the anchor sits to
+        // the hero's bottom edge.
+        travelRange = Math.max(window.innerHeight * 0.5, 280);
       }
+
+      // smoothstep for a gentle ease without overshooting endpoints
       function smooth(p) { return p * p * (3 - 2 * p); }
 
+      /* ONE rAF loop drives monogram travel and the story-image parallax.
+         All layout reads are batched first, then all style writes —
+         no interleaved read/write to avoid layout thrash. */
       function update() {
         ticking = false;
-        var y = window.scrollY;
+
+        // ── reads ──
         var vh = window.innerHeight;
-        var beatsRect = beatsWrap.getBoundingClientRect();
         var imgRect = storyImg.getBoundingClientRect();
 
-        var p = Math.min(Math.max(y / travelDist, 0), 1);
-        var e = smooth(p);
-        var naturalTop = anchorDocTop - y;
-        var x = anchorDocLeft + (slotLeft - anchorDocLeft) * e;
-        var ty = naturalTop + (slotTop - naturalTop) * e;
-        var s = 1 + (slotW / anchorW - 1) * e;
-        traveller.style.transform = 'translate(' + x + 'px,' + ty + 'px) scale(' + s + ')';
-        nav.classList.toggle('solid', p >= 0.98);
-
-        var tp = (vh * 0.6 - beatsRect.top) / beatsRect.height;
-        threadFill.style.transform = 'scaleY(' + Math.min(Math.max(tp, 0), 1) + ')';
+        // ── writes ──
+        if (prefersReduced) {
+          nav.classList.toggle('solid', heroEl.getBoundingClientRect().bottom <= nav.offsetHeight);
+        } else {
+          var y = window.scrollY;
+          var p = Math.min(Math.max((y - releaseY) / travelRange, 0), 1);
+          var e = smooth(p);
+          var homeTop = anchorDocTop - releaseY; // where the anchor naturally sits the moment it's released
+          var x = anchorDocLeft + (slotLeft - anchorDocLeft) * e;
+          var ty = y <= releaseY ? (anchorDocTop - y) : (homeTop + (slotTop - homeTop) * e);
+          var s = 1 + (slotW / anchorW - 1) * e;
+          traveller.style.transform = 'translate(' + x + 'px,' + ty + 'px) scale(' + s + ')';
+          nav.classList.toggle('solid', p >= 0.98);
+        }
 
         var drift = -((imgRect.top + imgRect.height / 2) - vh / 2) / vh * 16;
         storyImg.style.transform = 'translateY(' + Math.max(-8, Math.min(8, drift)) + 'px)';
       }
       function requestUpdate() { if (!ticking) { ticking = true; window.requestAnimationFrame(update); } }
-      function boot() { measure(); update(); }
+      function boot() { if (!prefersReduced) measure(); update(); }
 
       if (prefersReduced) {
+        // Static mode: no travel — anchor + nav slot show their own images
+        // (see body.static-logo CSS); nav still only turns solid once
+        // scrolled past the hero, so hero stays nav-less either way.
         body.classList.add('static-logo');
-        nav.classList.add('solid');
+        boot();
+        window.addEventListener('load', boot);
+        window.addEventListener('scroll', requestUpdate, { passive: true });
+        window.addEventListener('resize', requestUpdate);
       } else {
         if (travImg.complete) boot(); else travImg.addEventListener('load', boot);
         window.addEventListener('load', boot);
         window.addEventListener('scroll', requestUpdate, { passive: true });
-        var resizeT;
-        window.addEventListener('resize', function () { clearTimeout(resizeT); resizeT = setTimeout(boot, 120); });
-        boot();
+        var travResizeT;
+        window.addEventListener('resize', function () { clearTimeout(travResizeT); travResizeT = setTimeout(boot, 120); });
       }
-
-      /* ════ CUSTOMIZER — three site-wide axes on <html> (no persistence) ════ */
-      /* Each themed logo carries its own ink/paper pair (monogram, subtitle). */
-      var themedLogos = document.querySelectorAll('img.logo-themed');
-      var czOpts = document.querySelectorAll('.cz-opt');
-      var fadeT;
-      var DEFAULTS = { hero: 'light', accent: 'peru', font: 'dir1' };
-      var state = { hero: 'light', accent: 'peru', font: 'dir1' };
-
-      function syncButtons() {
-        czOpts.forEach(function (b) {
-          b.setAttribute('aria-pressed', state[b.dataset.axis] === b.dataset.val ? 'true' : 'false');
-        });
-      }
-
-      function applyAxis(axis, val, animate) {
-        if (state[axis] === val) return;
-        state[axis] = val;
-        if (animate && !prefersReduced) {
-          rootEl.classList.add('theme-fade');
-          clearTimeout(fadeT);
-          fadeT = setTimeout(function () { rootEl.classList.remove('theme-fade'); }, 450);
-        }
-        rootEl.setAttribute('data-' + axis, val);
-        if (axis === 'hero') {
-          var key = (val === 'dark') ? 'paper' : 'ink';
-          themedLogos.forEach(function (img) { img.src = img.dataset[key]; });
-        }
-        syncButtons();
-        updateHash();
-        updateStateLine();
-
-        // hero (logo aspect) and font (heights) change layout → re-measure the monogram journey
-        if (!prefersReduced && (axis === 'hero' || axis === 'font')) {
-          if (travImg.complete) boot();
-          else travImg.addEventListener('load', function onSwap() { travImg.removeEventListener('load', onSwap); boot(); });
-          // fonts can reflow after they paint; nudge a re-measure shortly after
-          setTimeout(boot, 260);
-        }
-      }
-
-      czOpts.forEach(function (b) {
-        b.addEventListener('click', function () { applyAxis(b.dataset.axis, b.dataset.val, true); });
-      });
-
-      document.getElementById('czReset').addEventListener('click', function () {
-        applyAxis('hero', DEFAULTS.hero, true);
-        applyAxis('accent', DEFAULTS.accent, true);
-        applyAxis('font', DEFAULTS.font, true);
-        updateHash();        /* covers the already-at-defaults case (applyAxis no-ops) */
-        updateStateLine();
-      });
-
-      /* ════ Shareable look: URL-hash state + "Copy this look" ════
-         Hash carries the three axes (#hero=…&accent=…&font=…) via
-         history.replaceState — no history spam, no scroll jump, and a
-         fresh load with a hash renders that state on first paint.
-         localStorage stays banned (CLAUDE.md §1, amended 03 Jul 2026). */
-      var czState = document.getElementById('czState');
-      var czCopyBtn = document.getElementById('czCopy');
-      var czCopyLabel = document.getElementById('czCopyLabel');
-      var LABELS = {
-        hero:   { light: 'Light hero', dark: 'Dark hero' },
-        accent: { peru: 'Peru', slate: 'Slate', sienna: 'Sienna' },
-        font:   { dir1: 'Cormorant', playfair: 'Playfair', lora: 'Lora' }
-      };
-      var VALID = { hero: ['light', 'dark'], accent: ['peru', 'slate', 'sienna'], font: ['dir1', 'playfair', 'lora'] };
-
-      function hashFor() {
-        if (state.hero === DEFAULTS.hero && state.accent === DEFAULTS.accent && state.font === DEFAULTS.font) return '';
-        return 'hero=' + state.hero + '&accent=' + state.accent + '&font=' + state.font;
-      }
-      function shareURL() {
-        var h = hashFor();
-        return location.origin + location.pathname + location.search + (h ? '#' + h : '');
-      }
-      function updateHash() {
-        try { history.replaceState(null, '', shareURL()); } catch (err) { /* exotic embeds */ }
-      }
-      function updateStateLine() {
-        czState.textContent = LABELS.hero[state.hero] + ' · ' + LABELS.accent[state.accent] + ' · ' + LABELS.font[state.font];
-      }
-      /* Unknown keys/values fall back to defaults silently; plain anchors (#about) pass through untouched */
-      function parseHash() {
-        var h = location.hash.replace(/^#/, '');
-        if (!h || h.indexOf('=') === -1) return;
-        h.split('&').forEach(function (kv) {
-          var pair = kv.split('=');
-          if (VALID[pair[0]] && VALID[pair[0]].indexOf(pair[1]) !== -1) applyAxis(pair[0], pair[1], false);
-        });
-      }
-
-      var copyT;
-      function copyFeedback(ok) {
-        czCopyLabel.textContent = ok ? 'Copied ✓' : 'Copy failed — copy the address bar';
-        clearTimeout(copyT);
-        copyT = setTimeout(function () { czCopyLabel.textContent = 'Copy this look'; }, 2000);
-      }
-      function fallbackCopy(text) {
-        var ta = document.createElement('textarea');
-        ta.value = text;
-        ta.setAttribute('readonly', '');
-        ta.style.position = 'fixed';
-        ta.style.opacity = '0';
-        document.body.appendChild(ta);
-        ta.select();
-        var ok = false;
-        try { ok = document.execCommand('copy'); } catch (err) { ok = false; }
-        document.body.removeChild(ta);
-        copyFeedback(ok);
-      }
-      czCopyBtn.addEventListener('click', function () {
-        var url = shareURL();
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(url).then(function () { copyFeedback(true); }, function () { fallbackCopy(url); });
-        } else { fallbackCopy(url); }
-      });
-
-      parseHash();
-      updateStateLine();
-
-      // Panel collapse (starts collapsed on small screens so it doesn't bury the hero)
-      var czPanel = document.getElementById('czPanel');
-      var czCollapse = document.getElementById('czCollapse');
-      if (window.innerWidth < 700) {
-        czPanel.classList.add('collapsed');
-        czCollapse.setAttribute('aria-expanded', 'false');
-        czCollapse.setAttribute('aria-label', 'Expand customizer');
-      }
-      czCollapse.addEventListener('click', function () {
-        var collapsed = czPanel.classList.toggle('collapsed');
-        czCollapse.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
-        czCollapse.setAttribute('aria-label', collapsed ? 'Expand customizer' : 'Collapse customizer');
-      });
 
       /* ════ Hero entrance ════ */
       if (prefersReduced) body.classList.add('hero-loaded');
@@ -1376,10 +1279,24 @@
         var bmRole = document.getElementById('bioModalRole');
         var bmQual = document.getElementById('bioModalQual');
         var bmBody = document.getElementById('bioModalBody');
+        var bmAvatar = document.getElementById('bioModalAvatar');
+        var bmPhoto = document.getElementById('bioModalPhoto');
+        var bmCard = bioModal.querySelector('.bio-modal-card');
         var bioReturnFocus = null;
+        var hoverOpened = false; // true only when the dwell timer (not a click/tap) opened the modal
 
         var openBio = function (card, trigger) {
           bmInitials.textContent = card.querySelector('.initials').textContent;
+          var cardImg = card.querySelector('.team-avatar img');
+          if (cardImg) {
+            bmPhoto.src = cardImg.src;
+            bmPhoto.alt = cardImg.alt;
+            bmPhoto.hidden = false;
+            bmAvatar.classList.add('has-photo');
+          } else {
+            bmPhoto.hidden = true;
+            bmAvatar.classList.remove('has-photo');
+          }
           bmName.textContent = card.querySelector('.team-name').textContent;
           bmRole.textContent = card.querySelector('.team-role').textContent;
           var q = card.querySelector('.team-qual');
@@ -1398,6 +1315,7 @@
         };
         var closeBio = function () {
           if (bioModal.hidden) return;
+          hoverOpened = false;
           bioModal.classList.remove('open');
           var done = function () {
             bioModal.hidden = true;
@@ -1407,14 +1325,52 @@
           if (prefersReduced) done(); else setTimeout(done, 260);
         };
 
+        /* §5.1: bio access on BOTH hover and tap — never hover-only (there is
+           no hover on touch). True mouse/trackpad hover (checked via the
+           (hover:hover) media feature, which touchscreens correctly fail)
+           opens the bio after a 1.3s dwell so a cursor merely passing over a
+           card doesn't pop the dialog; click/tap opens it immediately on
+           every device, exactly as before. Both paths open the identical
+           focus-trapped modal.
+
+           Hover-opened bios auto-close only once the cursor has actually
+           reached the modal card at least once — arming a close purely
+           from leaving the *triggering* card would fire immediately (the
+           card is wherever it is in the grid; the modal opens centred
+           elsewhere on screen, so the cursor is already "off" it the
+           instant it opens). Leaving the triggering card only cancels the
+           pending open-dwell now; the close-grace timer is armed solely by
+           the modal card's own mouseleave, which by definition can't fire
+           until the cursor has entered the modal card at least once.
+           Click/tap-opened bios are NOT auto-closed this way — they behave
+           like a normal modal (X / scrim / Esc only), since there may be no
+           mouse in play at all (touch, keyboard). */
+        var canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+        var closeLeaveT;
+        var armClose = function () { if (hoverOpened) { clearTimeout(closeLeaveT); closeLeaveT = setTimeout(closeBio, 400); } };
+        var cancelClose = function () { clearTimeout(closeLeaveT); };
+        if (canHover && bmCard) {
+          bmCard.addEventListener('mouseenter', cancelClose);
+          bmCard.addEventListener('mouseleave', armClose);
+        }
         document.querySelectorAll('#team .team-card').forEach(function (card) {
           var btn = card.querySelector('.team-bio-btn');
           if (!btn) return;
-          btn.addEventListener('click', function (e) { e.stopPropagation(); openBio(card, btn); });
+          btn.addEventListener('click', function (e) { e.stopPropagation(); hoverOpened = false; openBio(card, btn); });
           card.addEventListener('click', function (e) {
             if (e.target.closest('.team-bio-btn')) return;
+            hoverOpened = false;
             openBio(card, btn);
           });
+          if (canHover) {
+            var hoverT;
+            card.addEventListener('mouseenter', function () {
+              clearTimeout(hoverT);
+              cancelClose();
+              hoverT = setTimeout(function () { if (bioModal.hidden) { hoverOpened = true; openBio(card, btn); } }, 1300);
+            });
+            card.addEventListener('mouseleave', function () { clearTimeout(hoverT); });
+          }
         });
         bmClose.addEventListener('click', closeBio);
         bioModal.querySelector('[data-close]').addEventListener('click', closeBio);
@@ -1507,7 +1463,6 @@
       if (prefersReduced || !('IntersectionObserver' in window)) {
         reveals.forEach(function (el) { el.classList.add('visible'); });
         beats.forEach(function (el) { el.classList.add('visible'); });
-        threadFill.style.transform = 'scaleY(1)';
         fireReviews();
       } else {
         var io = new IntersectionObserver(function (entries) {
